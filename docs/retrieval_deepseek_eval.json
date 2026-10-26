@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "mode": "conditional_deepseek",
+  "requested_model": "deepseek-flash",
+  "source_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+  "label_status": "author_drafted_source_reviewed_not_independently_adjudicated",
+  "evaluated_at": "2026-10-26T19:07:16.097251+00:00",
+  "k": 5,
+  "candidate_pool": 8,
+  "equipment_requests": 0,
+  "gcode_or_credentials_in_context": false,
+  "limitation": "Small author-labelled heldout diagnostic set. Labels never sent to the model. This evaluates retrieval ordering, not equipment safety or repair success.",
+  "summary": {
+    "before": {
+      "queries": 6,
+      "hit_at_5": 0.8333333333333334,
+      "recall_at_5": 0.8333333333333334,
+      "mrr_at_5": 0.8333333333333334
+    },
+    "after": {
+      "queries": 6,
+      "hit_at_5": 1.0,
+      "recall_at_5": 0.9166666666666666,
+      "mrr_at_5": 1.0
+    },
+    "actual_calls": 2,
+    "successful_calls": 2,
+    "prompt_tokens": 6785,
+    "completion_tokens": 651
+  },
+  "queries": [
+    {
+      "id": "delayed_co2",
+      "needed": false,
+      "candidate_pool": 8,
+      "before": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:58a73822ce0db94e1287",
+          "hist:cc2adfb04a31379b9296"
+        ],
+        "source_ids": [
+          "hist:58a73822ce0db94e1287",
+          "hist:cc2adfb04a31379b9296",
+          "hist:5a49212065325863c7a5",
+          "runbook:runbooks.md",
+          "reference:03_Требования_к_агенту.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "runbook": 1,
+          "reference": 1
+        }
+      },
+      "after": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:58a73822ce0db94e1287",
+          "hist:cc2adfb04a31379b9296"
+        ],
+        "source_ids": [
+          "hist:58a73822ce0db94e1287",
+          "hist:cc2adfb04a31379b9296",
+          "hist:5a49212065325863c7a5",
+          "runbook:runbooks.md",
+          "reference:03_Требования_к_агенту.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "runbook": 1,
+          "reference": 1
+        }
+      },
+      "call": {
+        "called": false
+      }
+    },
+    {
+      "id": "smoke_short",
+      "needed": true,
+      "candidate_pool": 8,
+      "before": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:7d6dcbda8cfdcf184c3d"
+        ],
+        "source_ids": [
+          "hist:7d6dcbda8cfdcf184c3d",
+          "hist:044d6fb10a7266529230",
+          "hist:42fd8578dbda3058ad35",
+          "narrative:historical_logbook.md#2026-10-16",
+          "reference:01_API.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "narrative": 1,
+          "reference": 1
+        }
+      },
+      "after": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:7d6dcbda8cfdcf184c3d"
+        ],
+        "source_ids": [
+          "hist:7d6dcbda8cfdcf184c3d",
+          "hist:044d6fb10a7266529230",
+          "hist:42fd8578dbda3058ad35",
+          "reference:09_faults.md",
+          "reference:01_API.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "reference": 2
+        }
+      },
+      "call": {
+        "ok": true,
+        "cached": false,
+        "purpose": "retrieval_rerank",
+        "latency_ms": 2500,
+        "model": "deepseek-flash",
+        "usage": {
+          "prompt_tokens": 3218,
+          "completion_tokens": 322,
+          "total_tokens": 3540
+        }
+      }
+    },
+    {
+      "id": "e09_humidity",
+      "needed": false,
+      "candidate_pool": 8,
+      "before": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:282570b43a760f3c0ce3"
+        ],
+        "source_ids": [
+          "hist:282570b43a760f3c0ce3",
+          "hist:e99c3af0bb44a3f14730",
+          "hist:7c369a9a5e85c6770ad6",
+          "reference:01_API.md",
+          "narrative:historical_logbook.md#2026-10-14"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "reference": 1,
+          "narrative": 1
+        }
+      },
+      "after": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:282570b43a760f3c0ce3"
+        ],
+        "source_ids": [
+          "hist:282570b43a760f3c0ce3",
+          "hist:e99c3af0bb44a3f14730",
+          "hist:7c369a9a5e85c6770ad6",
+          "reference:01_API.md",
+          "narrative:historical_logbook.md#2026-10-14"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "reference": 1,
+          "narrative": 1
+        }
+      },
+      "call": {
+        "called": false
+      }
+    },
+    {
+      "id": "false_webhook_finish",
+      "needed": false,
+      "candidate_pool": 8,
+      "before": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:f15e4d6fefec3f712580"
+        ],
+        "source_ids": [
+          "hist:f15e4d6fefec3f712580",
+          "hist:24df87974c7b6bb4c8ef",
+          "hist:b4aee84b4782595e08db",
+          "reference:05_production.md",
+          "reference:01_API.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "reference": 2
+        }
+      },
+      "after": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:f15e4d6fefec3f712580"
+        ],
+        "source_ids": [
+          "hist:f15e4d6fefec3f712580",
+          "hist:24df87974c7b6bb4c8ef",
+          "hist:b4aee84b4782595e08db",
+          "reference:05_production.md",
+          "reference:01_API.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "reference": 2
+        }
+      },
+      "call": {
+        "called": false
+      }
+    },
+    {
+      "id": "line6_sensor_noise",
+      "needed": false,
+      "candidate_pool": 8,
+      "before": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:75008e01604d34346c3b"
+        ],
+        "source_ids": [
+          "hist:75008e01604d34346c3b",
+          "hist:734fccef9ed18541e8f5",
+          "hist:9a0b975cc9cd5ff07ffe",
+          "narrative:historical_logbook.md#2026-10-14",
+          "reference:01_API.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "narrative": 1,
+          "reference": 1
+        }
+      },
+      "after": {
+        "hit_at_k": true,
+        "recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "hist:75008e01604d34346c3b"
+        ],
+        "source_ids": [
+          "hist:75008e01604d34346c3b",
+          "hist:734fccef9ed18541e8f5",
+          "hist:9a0b975cc9cd5ff07ffe",
+          "narrative:historical_logbook.md#2026-10-14",
+          "reference:01_API.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "narrative": 1,
+          "reference": 1
+        }
+      },
+      "call": {
+        "called": false
+      }
+    },
+    {
+      "id": "inverter_fan_stop",
+      "needed": true,
+      "candidate_pool": 8,
+      "before": {
+        "hit_at_k": false,
+        "recall_at_k": 0.0,
+        "reciprocal_rank": 0,
+        "found": [],
+        "source_ids": [
+          "hist:282570b43a760f3c0ce3",
+          "hist:e99c3af0bb44a3f14730",
+          "hist:7c369a9a5e85c6770ad6",
+          "reference:01_API.md",
+          "reference:09_faults.md"
+        ],
+        "categories": {
+          "historical_episode": 3,
+          "reference": 2
+        }
+      },
+      "after": {
+        "hit_at_k": true,
+        "recall_at_k": 0.5,
+        "reciprocal_rank": 1.0,
+        "found": [
+          "narrative:historical_logbook.md#2026-10-17"
+        ],
+        "source_ids": [
+          "narrative:historical_logbook.md#2026-10-17",
+          "reference:09_faults.md",
+          "runbook:runbooks.md",
+          "hist:e99c3af0bb44a3f14730",
+          "hist:282570b43a760f3c0ce3"
+        ],
+        "categories": {
+          "narrative": 1,
+          "reference": 1,
+          "runbook": 1,
+          "historical_episode": 2
+        }
+      },
+      "call": {
+        "ok": true,
+        "cached": false,
+        "purpose": "retrieval_rerank",
+        "latency_ms": 2234,
+        "model": "deepseek-flash",
+        "usage": {
+          "prompt_tokens": 3567,
+          "completion_tokens": 329,
+          "total_tokens": 3896
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "source_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+  "label_status": "author_drafted_source_reviewed_not_independently_adjudicated",
+  "scope": "Small fixed retrieval diagnostic set, not a universal benchmark or safety validation. Questions are paraphrases, not copied headings. Telemetry values are constructed variants of source patterns, not new real observations. Heldout labels are frozen before measuring this evaluation run. No DeepSeek calls occur.",
+  "items": [
+    {
+      "id": "delayed_co2",
+      "split": "heldout",
+      "query": "Главный датчик резко вырос, а два спокойных запаздывают на четверть и полчаса. Значит ли это ложную тревогу?",
+      "relevant_source_ids": [
+        "hist:58a73822ce0db94e1287",
+        "hist:cc2adfb04a31379b9296"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "climate_sensor_01": {
+              "co2_ppm": 3150
+            },
+            "climate_sensor_02": {
+              "co2_ppm": 835,
+              "reading_delay_s": 900
+            },
+            "climate_sensor_03": {
+              "co2_ppm": 810,
+              "reading_delay_s": 1800
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [
+        {
+          "episode_id": "hist:58a73822ce0db94e1287",
+          "source": {
+            "file": "Logs/2026-10-14/telemetry.jsonl",
+            "line": 772,
+            "timestamp": 1791971460.0,
+            "at": "2026-10-14T12:51:00+03:00",
+            "file_sha256": "69f4555e68c4d2c498941d682c949d9a42912cea6c5e85a23aaecf0d5435f59c"
+          },
+          "description": "Существенное расхождение CO₂; большинство задержанных датчиков не доказывает ложную тревогу"
+        },
+        {
+          "episode_id": "hist:cc2adfb04a31379b9296",
+          "source": {
+            "file": "Logs/2026-10-16/telemetry.jsonl",
+            "line": 822,
+            "timestamp": 1792147260.0,
+            "at": "2026-10-16T13:41:00+03:00",
+            "file_sha256": "63d6ac6d04f6a436d12603c48a4a74fce264e3052e61e20642ebced3621b493d"
+          },
+          "description": "Существенное расхождение CO₂; большинство задержанных датчиков не доказывает ложную тревогу"
+        }
+      ],
+      "rationale": "Нужен эпизод несинхронного расхождения, а не вывод о ложной тревоге по большинству."
+    },
+    {
+      "id": "smoke_short",
+      "split": "heldout",
+      "query": "Пожарный датчик в мастерской тревожился меньше минуты, но на минутном снимке всё спокойно. Можно ли исключить тревогу?",
+      "relevant_source_ids": [
+        "hist:7d6dcbda8cfdcf184c3d"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "smoke_detector_01": {
+              "smoke_detected": false,
+              "alarm_state": "NORMAL"
+            }
+          }
+        }
+      },
+      "faults": [
+        {
+          "code": "EMERGENCY",
+          "target": "smoke_detector_01",
+          "subsystems": [
+            "safety",
+            "air"
+          ]
+        }
+      ],
+      "label_evidence": [
+        {
+          "episode_id": "hist:7d6dcbda8cfdcf184c3d",
+          "source": {
+            "file": "Logs/2026-10-16/events.jsonl",
+            "line": 183,
+            "timestamp": 1792141804.0,
+            "at": "2026-10-16T12:10:04+03:00",
+            "file_sha256": "957f5a53aa8ff73e9d31168b6807ee0fac56b8ac45dcb82afcb5cfb880eabd4a"
+          },
+          "description": "Краткая дымовая тревога в журнале событий; отсутствие на минутном снимке не опровергает тревогу"
+        }
+      ],
+      "rationale": "Короткое событие в events не опровергается редкой телеметрией; это не разрешение сбросить тревогу."
+    },
+    {
+      "id": "e09_humidity",
+      "split": "heldout",
+      "query": "Инвертор сообщил E09 после сырой ночи. Корпус не горячий. Какие похожие случаи помогут разобраться?",
+      "relevant_source_ids": [
+        "hist:282570b43a760f3c0ce3"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "solar_inverter_01": {
+              "error": true,
+              "error_code": "E09",
+              "inverter_temp_c": 40.2,
+              "fan_state": "ON",
+              "fan_current_a": 0.27,
+              "mode": "GRID_ONLY"
+            },
+            "climate_sensor_01": {
+              "humidity_pct": 96
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [
+        {
+          "episode_id": "hist:282570b43a760f3c0ce3",
+          "source": {
+            "file": "Logs/2026-10-14/telemetry.jsonl",
+            "line": 272,
+            "timestamp": 1791941460.0,
+            "at": "2026-10-14T04:31:00+03:00",
+            "file_sha256": "69f4555e68c4d2c498941d682c949d9a42912cea6c5e85a23aaecf0d5435f59c"
+          },
+          "description": "Ошибка инвертора: код, температура, влажность и питание нужны вместе"
+        }
+      ],
+      "rationale": "Релевантен эпизод E09; температура и влажность сопоставляются, причина не объявляется доказанной."
+    },
+    {
+      "id": "false_webhook_finish",
+      "split": "heldout",
+      "query": "На панели печать закончена, а деталь ещё строится. Как разобраться в противоречии?",
+      "relevant_source_ids": [
+        "hist:f15e4d6fefec3f712580"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "printer_3d_01": {
+              "state": "PRINTING",
+              "webhook_state": "COMPLETED",
+              "real_state": "PRINTING",
+              "progress_pct": 58.4,
+              "z_mm": 14.1
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [
+        {
+          "episode_id": "hist:f15e4d6fefec3f712580",
+          "source": {
+            "file": "Logs/2026-10-14/telemetry.jsonl",
+            "line": 652,
+            "timestamp": 1791964260.0,
+            "at": "2026-10-14T10:51:00+03:00",
+            "file_sha256": "69f4555e68c4d2c498941d682c949d9a42912cea6c5e85a23aaecf0d5435f59c"
+          },
+          "description": "Webhook завершения противоречит состоянию печати; проверять progress и координаты"
+        }
+      ],
+      "rationale": "Ожидается конфликт webhook с фактическим ходом печати, а не завершённое задание."
+    },
+    {
+      "id": "line6_sensor_noise",
+      "split": "heldout",
+      "query": "Обычный свет часто мигает, одновременно скачут показания климатических датчиков. Было ли подобное?",
+      "relevant_source_ids": [
+        "hist:75008e01604d34346c3b"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "smart_panel_01": {
+              "lines": [
+                {
+                  "line": 6,
+                  "name": "Обычное освещение",
+                  "state": "ON"
+                }
+              ]
+            },
+            "climate_sensor_01": {
+              "co2_ppm": 1100
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [
+        {
+          "episode_id": "hist:75008e01604d34346c3b",
+          "source": {
+            "file": "Logs/2026-10-14/events.jsonl",
+            "line": 237,
+            "timestamp": 1791984660.0,
+            "at": "2026-10-14T16:31:00+03:00",
+            "file_sha256": "3580217ffb9f1a3c4cf87192bcad5afd6f9a069698d780f4d7f1cf05af3fa280"
+          },
+          "description": "Серия переключений обычного освещения (индекс5, линия6 в этой истории); временное совпадение с шумом датчиков не доказывает причину"
+        }
+      ],
+      "rationale": "Серия переключений линии 6 и временная связь с шумом; причинность наводок не доказана."
+    },
+    {
+      "id": "inverter_fan_stop",
+      "split": "heldout",
+      "query": "Вентилятор инвертора перестал вращаться, его ток нулевой, а температура растёт при небольшой нагрузке. Нужна история похожего случая.",
+      "relevant_source_ids": [
+        "narrative:historical_logbook.md#2026-10-17",
+        "reference:03_energy.md"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "solar_inverter_01": {
+              "error": false,
+              "error_code": null,
+              "fan_state": "ON",
+              "fan_current_a": 0,
+              "inverter_temp_c": 55,
+              "power_deficit_w": 0
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [],
+      "rationale": "В manifest нет отдельного фан-эпизода: ожидаются дневник 17 октября и технический справочник. Рассказ человека не становится проверенной причиной."
+    },
+    {
+      "id": "warehouse_smoke",
+      "split": "development",
+      "query": "На складе появился дым, растёт CO, тушение активно. Где найти схожий кризис?",
+      "relevant_source_ids": [
+        "hist:044d6fb10a7266529230"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "smoke_detector_02": {
+              "smoke_detected": true,
+              "alarm_state": "ALARM"
+            },
+            "air_quality_sensor_01": {
+              "co_ppm": 4.8
+            },
+            "fire_suppression_01": {
+              "state": "ACTIVE"
+            }
+          }
+        }
+      },
+      "faults": [
+        {
+          "code": "EMERGENCY",
+          "target": "smoke_detector_02",
+          "subsystems": [
+            "safety",
+            "air"
+          ]
+        }
+      ],
+      "label_evidence": [
+        {
+          "episode_id": "hist:044d6fb10a7266529230",
+          "source": {
+            "file": "Logs/2026-10-18/telemetry.jsonl",
+            "line": 903,
+            "timestamp": 1792324920.0,
+            "at": "2026-10-18T15:02:00+03:00",
+            "file_sha256": "5b9d9ade36bdf1f133cc177c0fdc89dd12102392660df03a29de9787b19bcb5b"
+          },
+          "description": "Дымовая тревога; исторический контекст не разрешает подавление защиты"
+        }
+      ],
+      "rationale": "Реальная дымовая тревога складской зоны; исторические ложные тревоги не разрешают подавление защиты."
+    },
+    {
+      "id": "synchronous_co2",
+      "split": "development",
+      "query": "Воздух ухудшился: все три датчика сейчас показывают высокий углекислый газ. На что похожа ситуация?",
+      "relevant_source_ids": [
+        "hist:47ba156d9ccd8559499b"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "climate_sensor_01": {
+              "co2_ppm": 2700,
+              "reading_delay_s": 0
+            },
+            "climate_sensor_02": {
+              "co2_ppm": 2650,
+              "reading_delay_s": 0
+            },
+            "climate_sensor_03": {
+              "co2_ppm": 2780,
+              "reading_delay_s": 0
+            },
+            "supply_ventilation_01": {
+              "state": "ON",
+              "airflow_m3_h": 95,
+              "fresh_air_m3_h": 47
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [
+        {
+          "episode_id": "hist:47ba156d9ccd8559499b",
+          "source": {
+            "file": "Logs/2026-10-13/telemetry.jsonl",
+            "line": 1255,
+            "timestamp": 1791914040.0,
+            "at": "2026-10-13T20:54:00+03:00",
+            "file_sha256": "0e0d39c8fcf535f966e452c85bdad4146964669d8909b5c7e1eabc4601d7d586"
+          },
+          "description": "Рост CO₂ наблюдается на нескольких интерфейсах; проверить синхронность и приток"
+        }
+      ],
+      "rationale": "Совместный рост нескольких интерфейсов; независимость источников всё равно требует проверки."
+    },
+    {
+      "id": "supply_low_flow",
+      "split": "development",
+      "query": "Приток включён, но свежего воздуха мало, фильтр почти забит. Какой исторический отказ ближе?",
+      "relevant_source_ids": [
+        "hist:ec7f849bcf842519cc6d"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "supply_ventilation_01": {
+              "state": "ON",
+              "alarm": true,
+              "airflow_m3_h": 65,
+              "fresh_air_m3_h": 30,
+              "filter_clog_pct": 97,
+              "filter_state": "CLOGGED"
+            }
+          }
+        }
+      },
+      "faults": [
+        {
+          "code": "ACTUATOR_FAULT",
+          "target": "supply_ventilation_01",
+          "subsystems": [
+            "air"
+          ]
+        }
+      ],
+      "label_evidence": [
+        {
+          "episode_id": "hist:ec7f849bcf842519cc6d",
+          "source": {
+            "file": "Logs/2026-10-13/telemetry.jsonl",
+            "line": 1202,
+            "timestamp": 1791910860.0,
+            "at": "2026-10-13T20:01:00+03:00",
+            "file_sha256": "0e0d39c8fcf535f966e452c85bdad4146964669d8909b5c7e1eabc4601d7d586"
+          },
+          "description": "Исполнительный узел сообщает неисправность; пуск и ACK не доказывают поток"
+        }
+      ],
+      "rationale": "Нужен исполнительный эпизод притока, а не вытяжки или насоса воды."
+    },
+    {
+      "id": "energy_deficit",
+      "split": "development",
+      "query": "Заряд батареи резко низкий, мощности не хватает, производство теряет питание. Какой опыт полезен?",
+      "relevant_source_ids": [
+        "hist:7c369a9a5e85c6770ad6"
+      ],
+      "telemetry": {
+        "data": {
+          "nodes": {
+            "battery_01": {
+              "soc_pct": 18,
+              "state": "DISCHARGING"
+            },
+            "solar_inverter_01": {
+              "power_deficit_w": 250,
+              "output_voltage_v": 198
+            }
+          }
+        }
+      },
+      "faults": [],
+      "label_evidence": [
+        {
+          "episode_id": "hist:7c369a9a5e85c6770ad6",
+          "source": {
+            "file": "Logs/2026-10-15/telemetry.jsonl",
+            "line": 1152,
+            "timestamp": 1792080660.0,
+            "at": "2026-10-15T19:11:00+03:00",
+            "file_sha256": "c66757c91eb454087c237355a894f1639c05ef9929077c1379453f8cf387c20d"
+          },
+          "description": "Дефицит энергии или низкий SOC; простой разряд не равен отказу"
+        }
+      ],
+      "rationale": "Дефицит энергии отличается от нормального разряда АКБ."
+    }
+  ]
+}

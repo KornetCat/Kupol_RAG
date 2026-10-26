@@ -1,0 +1,53 @@
+{
+  "checked_date": "2026-10-26",
+  "repository": "https://github.com/WhiteDots/Dome_RAG",
+  "head_revision": "5e1ec4854ddcccb12efc5f0b4a9bfd94fa190438",
+  "previous_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+  "commits_ahead": 1,
+  "changes": [
+    {
+      "filename": "knowledge/Задание и техкарта.docx",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "previous_filename": null
+    },
+    {
+      "filename": "knowledge/Итог проект пленок Оксида меди.docx",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "previous_filename": null
+    },
+    {
+      "filename": "knowledge/Легенда реактор МКИ 2026.docx",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "previous_filename": null
+    },
+    {
+      "filename": "knowledge/Материалы для подготовки.docx",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "previous_filename": null
+    },
+    {
+      "filename": "knowledge/Окрашивание статья ЮТ.docx",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "previous_filename": null
+    }
+  ],
+  "telemetry_log_changes": 0,
+  "chemistry_documents_included": false,
+  "reason": "Пользователь исключил химические материалы; автоматизация этого аппарата не предусмотрена.",
+  "historical_log_revision_retained": "a16da2db079cdcb395e354383199effdf5a170b2"
+}

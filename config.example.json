@@ -1,0 +1,15 @@
+{
+  "approved_live": false,
+  "max_age_s": 15,
+  "max_measurement_delay_s": 5,
+  "min_airflow_pct": null,
+  "min_cooling_flow_l_min": null,
+  "min_supply_flow_m3_h": null,
+  "source_origins": null,
+  "verification_window_s": 8,
+  "verification_observations": 2,
+  "verification_timeout_s": 40,
+  "co2_threshold_ppm": 2000,
+  "log_dir": "logs",
+  "runbook_version": "1.0"
+}

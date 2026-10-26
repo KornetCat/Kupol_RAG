@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+/data/
+logs/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+tmp/
+/output/
+/outputs/
+/Dome_RAG-main.zip
+Keys/
+keys/

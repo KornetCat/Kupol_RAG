@@ -1,0 +1,208 @@
+{
+  "version": "1.0",
+  "subsystems": [
+    {
+      "id": "energy",
+      "title": "Генерация и преобразование энергии",
+      "description": "Источники, инвертор и обмен энергией с АКБ. Входы PV и сети, выход инвертора и распределительная шина являются разными точками измерения. Разряд АКБ сам по себе не доказывает отказ или дефицит.",
+      "signals": [
+        "solar_panels_01.*", "solar_inverter_01.*", "wind_turbine_01.*", "dizel_1.*",
+        "battery_01.*", "fuel_tank_01.*", "weather_station_01.illuminance_lux",
+        "weather_station_01.wind_speed_ms", "weather_station_01.temperature_c",
+        "smart_panel_01.bus_voltage_v", "smart_panel_01.bus_powered", "smart_panel_01.total_power_w",
+        "dome_automation_01.autonomy_forecast_h", "dome_automation_01.diesel_autostart",
+        "dome_automation_01.interlocks.IL_LOAD_SHED*", "dome_automation_01.interlocks.IL_INV_OVERLOAD*",
+        "dome_automation_01.interlocks.IL_HEAT*"
+      ],
+      "depends_on": ["resources", "telemetry_quality"]
+    },
+    {
+      "id": "resources",
+      "title": "Запасы и доступные ресурсы",
+      "description": "Накопленная энергия, топливо, вода, филамент и заготовки. Это общие ограничения энергетических, производственных и водных сценариев.",
+      "signals": [
+        "battery_01.*", "fuel_tank_01.*", "material_inventory_01.*", "water_tank_01.*",
+        "solar_inverter_01.battery_capacity_kwh", "solar_inverter_01.battery_soc_pct",
+        "printer_3d_01.filament_required_g", "printer_3d_01.filament_used_g",
+        "dizel_1.fuel_consumption_l_h", "dome_automation_01.autonomy_forecast_h"
+      ],
+      "depends_on": ["telemetry_quality"]
+    },
+    {
+      "id": "power_distribution",
+      "title": "Распределение питания",
+      "description": "Шина и линии щитка. Линия 1 питает рабочее место и вытяжку FabLab, 2 — бокс FabLab, 3 — принтер, 4 — ЧПУ, 5 — бокс Химлаб. Обесточенный потребитель не считается автоматически сломанным.",
+      "signals": [
+        "smart_panel_01.*", "solar_inverter_01.output_voltage_v", "solar_inverter_01.error",
+        "solar_inverter_01.error_code", "solar_inverter_01.load_power_w",
+        "fume_extraction_01.online", "fume_extraction_01.power_w",
+        "printer_3d_01.online", "printer_3d_01.power_w", "cnc_01.online", "cnc_01.power_w",
+        "thermal_insulation_01.online", "thermal_insulation_02.online",
+        "dome_automation_01.interlocks*", "dome_automation_01.line_current_limits_a"
+      ],
+      "depends_on": ["energy", "telemetry_quality"]
+    },
+    {
+      "id": "production",
+      "title": "Производственная задача",
+      "description": "Состояние задания, станков, материалов и условий производства. Остановка станка может быть следствием общего питания, воздуха, охлаждения или защиты, а не неисправностью станка.",
+      "signals": [
+        "printer_3d_01.*", "cnc_01.*", "material_inventory_01.*", "equipment_cooling_01.*",
+        "thermal_insulation_01.*", "fume_extraction_01.*", "smart_panel_01.lines*",
+        "climate_sensor_01.*", "dome_automation_01.interlocks*", "meeting_01.*"
+      ],
+      "depends_on": ["resources", "power_distribution", "air", "thermal", "safety", "communications", "telemetry_quality"]
+    },
+    {
+      "id": "air",
+      "title": "Воздух и микроклимат",
+      "description": "CO2, примеси, вытяжка, приток и герметизация. Дополнительные CO2-датчики могут показывать состояние 15 и 30 минут назад; их нельзя автоматически считать синхронным большинством.",
+      "signals": [
+        "climate_sensor_01.*", "climate_sensor_02.*", "climate_sensor_03.*", "air_quality_sensor_01.*",
+        "fume_extraction_01.*", "supply_ventilation_01.*", "dome_sealing_01.*",
+        "thermal_insulation_01.*", "thermal_insulation_02.*", "weather_station_01.*",
+        "smart_panel_01.lines*", "dome_automation_01.primary_co2_sensor",
+        "dome_automation_01.ventilation_auto", "dome_automation_01.interlocks.IL_CO2*",
+        "dome_automation_01.interlocks.IL_STORM*", "dome_automation_01.interlocks.IL_SMOKE*"
+      ],
+      "depends_on": ["power_distribution", "safety", "communications", "telemetry_quality"]
+    },
+    {
+      "id": "thermal",
+      "title": "Тепловые режимы и охлаждение",
+      "description": "Охлаждение станков, вентиляторы и микроклимат боксов. Температура, влажность и точка росы связаны с конденсатом. Выключенный автоматический вентилятор без иных признаков не является доказанным отказом.",
+      "signals": [
+        "equipment_cooling_01.*", "thermal_insulation_01.*", "thermal_insulation_02.*",
+        "printer_3d_01.nozzle_temp_c", "printer_3d_01.nozzle_target_c", "printer_3d_01.bed_temp_c",
+        "printer_3d_01.bed_target_c", "cnc_01.spindle_temp_c",
+        "solar_inverter_01.inverter_temp_c", "solar_inverter_01.fan_mode",
+        "solar_inverter_01.fan_state", "solar_inverter_01.fan_current_a",
+        "fume_extraction_01.motor_temp_c", "fume_extraction_01.motor_state",
+        "climate_sensor_01.temperature_c", "climate_sensor_01.humidity_pct", "climate_sensor_01.dew_point_c",
+        "climate_sensor_02.temperature_c", "climate_sensor_02.humidity_pct", "climate_sensor_02.dew_point_c",
+        "climate_sensor_03.temperature_c", "climate_sensor_03.humidity_pct", "climate_sensor_03.dew_point_c",
+        "weather_station_01.temperature_c", "smart_panel_01.lines*",
+        "dome_automation_01.interlocks.IL_CONDENSATE*", "dome_automation_01.interlocks.IL_HEAT*"
+      ],
+      "depends_on": ["energy", "power_distribution", "air", "telemetry_quality"]
+    },
+    {
+      "id": "safety",
+      "title": "Безопасность и автоматика",
+      "description": "Дым, пожаротушение, доступ, внешние опасности и интерлоки ПЛК. Правила аварийных действий и ограничения защиты не могут изменяться выводами RAG или накопленной памятью.",
+      "signals": [
+        "smoke_detector_01.*", "smoke_detector_02.*", "fire_suppression_01.*", "access_control_01.*",
+        "radiation_sensor_01.*", "chem_sensor_01.*", "seysmo_01.*", "dome_automation_01.*",
+        "climate_sensor_01.*", "air_quality_sensor_01.*", "weather_station_01.wind_speed_ms",
+        "solar_inverter_01.error", "solar_inverter_01.error_code", "solar_inverter_01.inverter_temp_c",
+        "smart_panel_01.lines*", "fume_extraction_01.*", "meeting_01.*"
+      ],
+      "depends_on": ["power_distribution", "communications", "telemetry_quality"]
+    },
+    {
+      "id": "water",
+      "title": "Водоснабжение и водоочистка",
+      "description": "Насос, запас воды и фильтрация. Нулевой расход при неработающем насосе не доказывает отказ без сведений о потреблении. Показатели источника и очищенной воды различаются.",
+      "signals": [
+        "water_pump_01.*", "water_tank_01.*", "water_filter_01.*",
+        "smart_panel_01.bus_powered", "smart_panel_01.bus_voltage_v", "smart_panel_01.lines*",
+        "weather_station_01.precipitation_mm_h", "solar_inverter_01.power_deficit_w"
+      ],
+      "depends_on": ["resources", "power_distribution", "communications", "telemetry_quality"]
+    },
+    {
+      "id": "communications",
+      "title": "Связь, вычисления и координация",
+      "description": "Каналы связи, вычислительные сервисы и чат оператора. Массовая потеря наблюдений локализуется сначала как общий отказ связи или питания, а не как множество независимых отказов устройств.",
+      "signals": [
+        "network_link_01.*", "radio_01.*", "backup_comms_01.*", "edge_compute_01.*", "meeting_01.*",
+        "smart_panel_01.bus_powered", "smart_panel_01.bus_voltage_v", "*.online", "*.updated_at", "*.status"
+      ],
+      "depends_on": ["power_distribution", "telemetry_quality"]
+    },
+    {
+      "id": "telemetry_quality",
+      "title": "Достоверность и время измерений",
+      "description": "Общий диагностический слой всех подсистем. Проверяет наличие, свежесть и время источников, задержку, прогрев и дрейф. Служебный status OK не доказывает физическую исправность или достоверность каждого измерения.",
+      "signals": [
+        "*.online", "*.updated_at", "*.status", "*.confidence", "*.reading_delay_s",
+        "*.sensor_state", "*.warming_up", "*.data_available", "*.drift_temp_c",
+        "*.drift_humidity_pct", "*.drift_co2_ppm", "network_link_01.*",
+        "edge_compute_01.clock_offset_s", "dome_automation_01.data_trust"
+      ],
+      "depends_on": []
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "resources", "downstream": "energy",
+      "signals": ["battery_01.soc_pct", "battery_01.charge_allowed", "fuel_tank_01.volume_l", "fuel_tank_01.fuel_quality"],
+      "reason": "Доступные запасы и ограничения АКБ определяют возможность поддерживать энергоснабжение."
+    },
+    {
+      "upstream": "energy", "downstream": "power_distribution",
+      "signals": ["solar_inverter_01.output_voltage_v", "solar_inverter_01.error_code", "solar_inverter_01.power_deficit_w", "smart_panel_01.bus_powered", "smart_panel_01.bus_voltage_v"],
+      "reason": "Проблема преобразования или доступной мощности может затронуть общую шину и несколько потребителей одновременно."
+    },
+    {
+      "upstream": "power_distribution", "downstream": "production",
+      "signals": ["smart_panel_01.lines*", "printer_3d_01.online", "cnc_01.online", "printer_3d_01.hold_reason", "cnc_01.hold_reason"],
+      "reason": "Линия 3 питает принтер, линия 4 — ЧПУ. Потеря питания является возможной первичной причиной недоступности станка."
+    },
+    {
+      "upstream": "power_distribution", "downstream": "air",
+      "signals": ["smart_panel_01.lines*", "fume_extraction_01.online", "fume_extraction_01.enabled", "fume_extraction_01.fan_rpm", "fume_extraction_01.airflow_pct"],
+      "reason": "Линия 1 питает рабочее место и вытяжку FabLab. Перед диагнозом двигателя нужно исключить отсутствие питания."
+    },
+    {
+      "upstream": "power_distribution", "downstream": "thermal",
+      "signals": ["smart_panel_01.lines*", "thermal_insulation_01.online", "thermal_insulation_02.online", "thermal_insulation_01.fans_rpm", "thermal_insulation_02.fans_rpm"],
+      "reason": "Линии 2 и 5 питают боксы FabLab и Химлаб. Без питания вентиляторы и измерения бокса могут стать недоступны."
+    },
+    {
+      "upstream": "air", "downstream": "safety",
+      "signals": ["climate_sensor_01.co2_ppm", "climate_sensor_02.co2_ppm", "climate_sensor_03.co2_ppm", "air_quality_sensor_01.*", "dome_automation_01.interlocks.IL_CO2*"],
+      "reason": "Параметры воздуха вызывают защитные реакции. Достоверность и временное выравнивание измерений проверяются до вывода о ложной тревоге."
+    },
+    {
+      "upstream": "thermal", "downstream": "safety",
+      "signals": ["climate_sensor_01.temperature_c", "climate_sensor_01.humidity_pct", "climate_sensor_01.dew_point_c", "solar_inverter_01.inverter_temp_c", "dome_automation_01.interlocks.IL_CONDENSATE*", "dome_automation_01.interlocks.IL_HEAT*"],
+      "reason": "Конденсат и перегрев могут стать причинами интерлоков и последующих отключений."
+    },
+    {
+      "upstream": "safety", "downstream": "production",
+      "signals": ["dome_automation_01.interlocks*", "printer_3d_01.hold_level", "printer_3d_01.hold_reason", "cnc_01.hold_level", "cnc_01.hold_reason"],
+      "reason": "Удержание станка может быть штатным следствием защиты. Устранение первичной причины предшествует допустимому возобновлению."
+    },
+    {
+      "upstream": "thermal", "downstream": "production",
+      "signals": ["equipment_cooling_01.*", "printer_3d_01.nozzle_temp_c", "printer_3d_01.bed_temp_c", "cnc_01.spindle_temp_c", "thermal_insulation_01.temperature_c"],
+      "reason": "Охлаждение и температурные условия ограничивают производство; сам факт включения насоса не подтверждает достаточный поток."
+    },
+    {
+      "upstream": "resources", "downstream": "production",
+      "signals": ["material_inventory_01.*", "printer_3d_01.filament_required_g", "printer_3d_01.filament_used_g", "printer_3d_01.hold_reason"],
+      "reason": "Недостаток материалов и FILAMENT_RUNOUT требуют отдельного сценария, а не повторных resume."
+    },
+    {
+      "upstream": "power_distribution", "downstream": "communications",
+      "signals": ["smart_panel_01.bus_powered", "smart_panel_01.bus_voltage_v", "network_link_01.panel_link_state", "network_link_01.link_state"],
+      "reason": "Питание и состояние канала щита помогают различать потерю связи и общий отказ питания. Номер питающей линии сетевого узла здесь не предполагается."
+    },
+    {
+      "upstream": "communications", "downstream": "telemetry_quality",
+      "signals": ["network_link_01.*", "edge_compute_01.services", "*.online", "*.status", "*.updated_at"],
+      "reason": "Потеря транспорта или сервиса может сделать сразу много показаний устаревшими; это диагностическая связь, а не независимые поломки всех датчиков."
+    },
+    {
+      "upstream": "resources", "downstream": "water",
+      "signals": ["water_tank_01.volume_l", "water_tank_01.level_pct", "water_pump_01.source_level_pct"],
+      "reason": "Запас воды и уровень источника являются условиями водоснабжения."
+    },
+    {
+      "upstream": "power_distribution", "downstream": "water",
+      "signals": ["smart_panel_01.bus_powered", "smart_panel_01.bus_voltage_v", "water_pump_01.online", "water_pump_01.running", "water_pump_01.motor_current_a"],
+      "reason": "Перед диагнозом насоса требуется исключить общую потерю питания. Конкретная линия насоса не задается без подтвержденной топологии."
+    }
+  ]
+}

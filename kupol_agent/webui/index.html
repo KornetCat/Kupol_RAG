@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101824">
+  <title>Купол — центр управления</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К содержимому</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Навигация">
+      <a class="brand" href="#overview" aria-label="Купол — обзор">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M5 29a15 15 0 0 1 30 0M10 29a10 18 0 0 1 20 0M20 14v15M6 22h28M4 29h32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <span>КУПОЛ<small>ЦЕНТР УПРАВЛЕНИЯ</small></span>
+      </a>
+      <div class="sidebar-caption">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+      <nav class="nav-list">
+        <a class="nav-link active" href="#overview" data-view="overview"><span aria-hidden="true">◈</span> Обзор системы</a>
+        <a class="nav-link" href="#telemetry" data-view="telemetry"><span aria-hidden="true">▥</span> Телеметрия <span class="nav-count" id="navNodeCount">0</span></a>
+        <a class="nav-link" href="#files" data-view="files"><span aria-hidden="true">▤</span> Файлы и производство</a>
+        <a class="nav-link" href="#history" data-view="history"><span aria-hidden="true">◷</span> Журнал и опыт</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="provider-label"><span class="provider-dot"></span><span>Только DeepSeek</span></div>
+        <p>Телеметрия, диагностика и действия в одном рабочем пространстве.</p>
+        <div class="team-label">КОМАНДА <strong id="sidebarTeam">04</strong><span id="sidebarRole">Нет сессии</span></div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div><div class="eyebrow">ЛИГА АВТОНОМНЫХ СИСТЕМ</div><h1 id="pageTitle">Обзор системы</h1></div>
+        <div class="topbar-right"><span id="streamStatus" class="stream-status"><span class="status-dot"></span> Интерфейс запускается</span><time id="localClock" class="local-clock">—</time></div>
+      </header>
+
+      <main id="main">
+        <section class="connection-panel" aria-labelledby="connectionTitle">
+          <div class="connection-heading"><div><h2 id="connectionTitle">Подключение к Куполу</h2><p>Укажите актуальный адрес сервера в локальной сети</p></div><span id="connectionBadge" class="badge neutral">Не подключён</span></div>
+          <form id="connectionForm" class="connection-form">
+            <div class="field address-field"><label for="domeAddress">Адрес Купола</label><div class="input-with-icon"><span aria-hidden="true">↗</span><input id="domeAddress" name="address" type="text" placeholder="IP:порт или ws://адрес:порт" autocomplete="off" spellcheck="false" required maxlength="1024"></div></div>
+            <div class="field profile-field"><label for="profileSelect">Режим работы</label><select id="profileSelect" name="profile"><option value="training">Тренировка</option><option value="competition">Соревнование</option></select></div>
+            <button id="connectButton" class="button primary" type="submit"><span aria-hidden="true">↗</span> Подключить</button>
+            <button id="disconnectButton" class="button subtle" type="button" disabled>Отключить</button>
+          </form>
+          <div class="connection-footer"><span id="connectionDetails">Адрес не сохраняется между запусками интерфейса.</span><details id="credentialsDetails"><summary>Ключи доступа</summary><div class="credentials-grid"><div class="field"><label for="domeKey">Ключ команды Купола</label><input id="domeKey" type="password" autocomplete="new-password" placeholder="Из окружения или архива" maxlength="4096"></div><div class="field"><label for="deepseekKey">Ключ DeepSeek</label><input id="deepseekKey" type="password" autocomplete="new-password" placeholder="Из окружения или архива" maxlength="4096"></div><p>Указывайте только при необходимости. Ключи не сохраняются в браузере.</p></div></details></div>
+          <p id="connectionError" class="inline-error" role="alert" hidden></p>
+        </section>
+
+        <div id="profileNotice" class="profile-notice" hidden><span aria-hidden="true">◇</span><p><strong>Соревновательный режим.</strong> Ручные команды и передача файлов доступны. Все действия проходят проверку текущих прав, состояния устройств и ограничений регламента.</p></div>
+        <div id="modelPolicyNotice" class="profile-notice" role="status" hidden><span aria-hidden="true">◇</span><p><strong>Модель DeepSeek требует настройки.</strong> <span id="modelPolicyReason"></span></p></div>
+        <section id="criticalBanner" class="critical-banner" aria-live="assertive" hidden><span class="critical-icon" aria-hidden="true">!</span><div><strong id="criticalTitle">Обнаружена кризисная ситуация</strong><p id="criticalText"></p></div></section>
+
+        <section id="overviewView" class="view-section" aria-label="Обзор системы">
+          <div class="section-heading"><div><span class="eyebrow">ТЕКУЩЕЕ СОСТОЯНИЕ</span><h2>Купол в реальном времени</h2></div><span class="freshness" id="freshnessLabel"><span class="status-dot"></span> Ожидание телеметрии</span></div>
+          <div class="autonomy-bar"><div><strong>Автоматическое реагирование</strong><p id="autonomyDescription">Наблюдение и диагностика без автоматических команд</p><p class="autonomy-scope">Переключатель разрешает автоматические сценарии текущей сессии. После переподключения включите их снова при необходимости.</p></div><label class="toggle-control"><span id="autonomyLabel">Выключено</span><input id="autonomyToggle" type="checkbox" role="switch" aria-label="Автоматическое реагирование"><span class="toggle-track" aria-hidden="true"></span></label></div>
+          <details id="autonomyConfiguration" class="autonomy-configuration"><summary>Настройка автоуправления</summary><div class="autonomy-configuration-body"><p>Укажите минимальные потоки, допустимые для подключённого объекта. Текущие показания приведены для справки и не подставляются как пороги.</p><form id="autonomyConfigForm"><div class="autonomy-criteria-grid"><div class="field"><label for="minAirflowPct">Минимальный поток вытяжки, %</label><input id="minAirflowPct" type="number" min="0" max="100" step="any" inputmode="decimal" required aria-describedby="currentFumeFlow"><small id="currentFumeFlow">Нет текущего показания.</small></div><div class="field"><label for="minSupplyFlow">Минимальный приток, м³/ч</label><input id="minSupplyFlow" type="number" min="0" step="any" inputmode="decimal" required aria-describedby="currentSupplyFlow"><small id="currentSupplyFlow">Нет текущего показания.</small></div><div class="field"><label for="minCoolingFlow">Минимальный поток охлаждения, л/мин</label><input id="minCoolingFlow" type="number" min="0" step="any" inputmode="decimal" required aria-describedby="currentCoolingFlow"><small id="currentCoolingFlow">Нет текущего показания.</small></div></div><label class="autonomy-safety-confirm"><input id="autonomySafetyConfirmed" type="checkbox" required><span>Подтверждаю безопасное состояние и эти параметры для подключённого объекта</span></label><button id="saveAutonomyConfig" class="button primary small" type="submit" disabled>Сохранить и подтвердить</button></form><p id="autonomyConfigAvailability" class="autonomy-config-availability" role="status">Подключитесь с правами команды.</p><p id="autonomyConfigStatus" class="form-status" role="status"></p></div></details>
+          <div class="metrics-grid" id="metricsGrid">
+            <article class="metric-card"><div class="metric-label">Заряд батареи <span aria-hidden="true">▰</span></div><div class="metric-value" id="metricBattery">—<small>%</small></div><div class="metric-note" id="noteBattery">Нет данных</div><div class="meter"><span id="batteryMeter"></span></div></article>
+            <article class="metric-card"><div class="metric-label">CO₂ внутри <span aria-hidden="true">≋</span></div><div class="metric-value" id="metricCo2">—<small>ppm</small></div><div class="metric-note" id="noteCo2">Нет данных</div><div class="metric-rule"></div></article>
+            <article class="metric-card"><div class="metric-label">Температура <span aria-hidden="true">♧</span></div><div class="metric-value" id="metricTemperature">—<small>°C</small></div><div class="metric-note" id="noteTemperature">Нет данных</div><div class="metric-rule"></div></article>
+            <article class="metric-card"><div class="metric-label">Нагрузка <span aria-hidden="true">ϟ</span></div><div class="metric-value" id="metricPower">—<small>Вт</small></div><div class="metric-note" id="notePower">Нет данных</div><div class="metric-rule"></div></article>
+          </div>
+
+          <div class="overview-columns">
+            <div class="overview-main">
+              <section class="panel production-panel"><div class="panel-heading"><h3>Производство</h3><a class="text-link" href="#files">Файлы и задания <span aria-hidden="true">↗</span></a></div><div class="machine-grid" id="machineOverview"></div></section>
+              <section class="panel"><div class="panel-heading"><div><h3>Диагностика подсистем</h3><p>Причины, свидетельства и результат реакции агента</p></div><span class="badge neutral" id="faultCount">0 событий</span></div><div id="diagnosticsList" class="diagnostics-list"></div></section>
+              <section id="deepseekAdvisoryPanel" class="panel advisory-panel" aria-labelledby="deepseekAdvisoryTitle" hidden><div class="panel-heading"><div><h3 id="deepseekAdvisoryTitle">Анализ DeepSeek</h3><p>Автоматический разбор текущей ситуации</p></div><span class="badge neutral">Диагностика</span></div><div id="deepseekAdvisoryBody" class="advisory-body"></div></section>
+              <section class="panel"><div class="panel-heading"><h3>Последние события</h3><a class="text-link" href="#history">Весь журнал <span aria-hidden="true">↗</span></a></div><div id="recentEvents" class="event-list"></div></section>
+            </div>
+            <section id="chatPanel" class="panel chat-panel" aria-labelledby="chatTitle">
+              <div class="panel-heading chat-heading"><div class="chat-title-row"><div class="assistant-mark" aria-hidden="true">D</div><div><h3 id="chatTitle">Ассистент Купола</h3><p id="chatModel">DeepSeek · RAG</p></div></div><span id="llmBadge" class="badge neutral">Нет ключа</span></div>
+              <div class="chat-context"><span class="status-dot" id="chatContextDot"></span><span id="chatContextLabel">Ожидает данные Купола</span></div>
+              <section class="manual-priority" aria-labelledby="manualPriorityTitle"><div class="manual-priority-heading"><h4 id="manualPriorityTitle">Указания на будущее</h4><span id="manualPriorityCount" class="badge neutral">Нет активных</span></div><p id="manualPrioritySummary">Сохранённые указания учитываются при последующих решениях агента до явного снятия.</p><div class="work-context"><label><input id="requiredFumeContext" type="checkbox" aria-describedby="workContextHint"><span>Текущим работам требуется вытяжка</span></label><p id="workContextHint">Сохраняется как указание для последующих решений агента.</p><p id="workContextStatus" role="status">Потребность в вытяжке не указана.</p></div><div id="manualPriorityDetails" class="manual-priority-details" hidden></div><div class="manual-priority-footer"><span>Права API и аппаратные защиты сохраняются.</span><button id="clearDirectivesButton" type="button" class="text-button" hidden>Снять указания</button></div></section>
+              <div id="chatMessages" class="chat-messages" role="log" aria-live="polite" aria-relevant="additions text"><div class="chat-welcome"><div class="welcome-orbit" aria-hidden="true">◈</div><h4>С чего начнём?</h4><p>Спросите о состоянии Купола или причине неисправности. Ответы опираются на телеметрию, документацию и опыт устранения отказов.</p><button type="button" class="prompt-chip" data-prompt="Оцени текущее состояние Купола и перечисли приоритетные проблемы.">Оценить состояние Купола <span aria-hidden="true">↗</span></button><button type="button" class="prompt-chip" data-prompt="Какие неисправности обнаружены и какие данные подтверждают их причины?">Разобрать неисправности <span aria-hidden="true">↗</span></button></div></div>
+              <div id="chatBusy" class="chat-busy" role="status" hidden><span></span><span></span><span></span> DeepSeek анализирует данные</div>
+              <form id="chatForm" class="chat-form"><div class="chat-kind-row"><label for="chatMessageKind">Тип сообщения</label><select id="chatMessageKind" name="message_kind" aria-describedby="chatKindHint"><option value="request" selected>Разовый запрос</option><option value="directive">Указание на будущее</option></select></div><p id="chatKindHint" class="chat-kind-hint" role="status">Вопрос или команда выполняется один раз и не становится указанием на будущее.</p><label class="sr-only" for="chatInput">Сообщение ассистенту DeepSeek</label><div class="chat-compose"><textarea id="chatInput" rows="2" maxlength="6000" aria-describedby="chatKindHint" placeholder="Спросите о системе или задайте команду…"></textarea><button id="chatSendButton" type="submit" class="send-button" aria-label="Отправить сообщение"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 14-7-4 14-3-6-7-1Zm7 1 7-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><p id="chatHint">Enter — отправить · Shift + Enter — новая строка</p></form>
+            </section>
+          </div>
+        </section>
+
+        <section id="telemetryView" class="view-section" aria-label="Телеметрия" hidden>
+          <div class="section-heading"><div><span class="eyebrow">ПАРАМЕТРЫ И ДОСТОВЕРНОСТЬ</span><h2>Узлы Купола</h2></div><span class="badge neutral" id="nodeSummary">Нет данных</span></div>
+          <section class="panel direct-control-panel" aria-labelledby="directControlTitle"><div class="panel-heading"><div><h3 id="directControlTitle">Прямое управление через API</h3><p>Разовая команда без DeepSeek. Права API, свежесть данных и аппаратные защиты проверяет исполнитель.</p></div><span class="badge neutral">manual_api</span></div><form id="directControlForm" class="direct-control-form"><div class="field"><label for="directControlNode">Узел управления</label><select id="directControlNode" disabled><option value="">Нет доступных узлов</option></select></div><div class="field"><label for="directControlAction">Действие API</label><select id="directControlAction" disabled><option value="">Нет доступных действий</option></select></div><div class="field direct-control-value"><label for="directControlValue">Значение value</label><input id="directControlValue" type="text" maxlength="2048" autocomplete="off" spellcheck="false" aria-describedby="directControlValueHint" disabled><small id="directControlValueHint">Для выбранного действия параметр не требуется.</small></div><button id="directControlSend" class="button primary" type="submit" disabled>Отправить команду</button></form><p id="directControlAvailability" class="direct-control-availability" role="status">Подключитесь с правами команды.</p><div id="directControlResult" class="direct-control-result" aria-live="polite"></div></section>
+          <div class="telemetry-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">Поиск узла или параметра</span><input id="nodeSearch" type="search" placeholder="Найти узел, параметр или значение" autocomplete="off"></label><label class="compact-select"><span>Показать</span><select id="nodeFilter"><option value="all">Все узлы</option><option value="problem">С ошибками или не в сети</option><option value="online">В сети</option></select></label><button id="expandNodesButton" class="button subtle small" type="button">Раскрыть параметры</button></div>
+          <div id="nodesGrid" class="nodes-grid"></div>
+        </section>
+
+        <section id="filesView" class="view-section" aria-label="Файлы и производство" hidden>
+          <div class="section-heading"><div><span class="eyebrow">ПЕРЕДАЧА ЧЕРЕЗ API КУПОЛА</span><h2>Файлы и производство</h2></div><span class="badge neutral">Загрузка не запускает станок</span></div>
+          <div class="files-columns"><section class="panel"><div class="panel-heading"><div><h3>Передать файл станку</h3><p>G-code, предоставленный организаторами · текстовый формат</p></div></div><form id="uploadForm" class="upload-form"><div class="field"><label for="fileDevice">Оборудование</label><select id="fileDevice" name="node_id"><option value="printer_3d_01">3D-принтер</option><option value="cnc_01">Фрезерный станок</option></select></div><label class="file-drop" id="fileDrop" for="machineFile"><span class="file-drop-icon" aria-hidden="true">↑</span><strong id="selectedFileLabel">Выбрать файл</strong><span id="selectedFileDetails">G-code / NC · текст UTF-8 · до 16 МБ</span><input id="machineFile" type="file" name="file" accept=".gcode,.nc,.tap,.ngc,.gco" required></label><label class="organizer-declaration"><input id="organizerPrepared" type="checkbox" name="organizer_prepared" required><span>Файл предоставлен организаторами</span></label><p class="upload-requirement" id="organizerRequirement">Для передачи через API отметьте происхождение выбранного G-code согласно п. 7.3.</p><div class="upload-info"><span aria-hidden="true">ⓘ</span><p>Файл передаётся выбранному устройству через API Купола. Запуск задания — отдельная команда, которую агент проверит по текущему состоянию системы.</p></div><button id="uploadButton" type="submit" class="button primary">Передать файл <span aria-hidden="true">↗</span></button><p id="uploadStatus" class="form-status" role="status"></p></form></section>
+          <section class="panel"><div class="panel-heading"><div><h3>Файлы на устройстве</h3><p id="remoteDeviceLabel">3D-принтер</p></div><button id="refreshFilesButton" type="button" class="button subtle small"><span aria-hidden="true">↻</span> Обновить</button></div><div id="remoteFiles" class="remote-files"></div><div class="job-start-controls"><p id="selectedRemoteFile">Выберите файл из каталога устройства</p><button id="startJobButton" class="button primary" type="button" disabled>Запустить выбранный файл <span aria-hidden="true">↗</span></button><p id="jobStartStatus" class="form-status" role="status"></p></div></section></div>
+          <div class="panel files-machine-status"><div class="panel-heading"><h3>Состояние оборудования</h3></div><div id="filesMachines" class="machine-grid"></div></div>
+        </section>
+
+        <section id="historyView" class="view-section" aria-label="Журнал и опыт" hidden>
+          <div class="section-heading"><div><span class="eyebrow">ПРОИСХОЖДЕНИЕ РЕШЕНИЙ</span><h2>Журнал и опыт</h2></div><button id="refreshHistoryButton" class="button subtle small" type="button"><span aria-hidden="true">↻</span> Обновить</button></div>
+          <div class="history-summary" id="historySummary"></div>
+          <div class="history-columns"><section class="panel"><div class="panel-heading"><div><h3>События текущего запуска</h3><p>Наблюдение → решение → действие → проверка</p></div><span class="badge neutral" id="eventCount">0</span></div><div id="allEvents" class="event-list full-events"></div></section><section class="panel"><div class="panel-heading"><div><h3>Память инцидентов</h3><p>Успех учитывается после проверки фактического эффекта</p></div></div><div id="caseHistory" class="case-history"></div></section></div>
+        </section>
+
+        <footer class="workspace-footer"><span>КУПОЛ / ОПЕРАЦИОННАЯ ПАНЕЛЬ</span><span id="footerStatus">Данные появятся после подключения</span></footer>
+      </main>
+    </div>
+  </div>
+  <div id="toastRegion" class="toast-region" role="status" aria-live="polite"></div>
+</body>
+</html>

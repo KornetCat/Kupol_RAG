@@ -1,0 +1,839 @@
+{
+  "version": "0.4.0",
+  "verified_at": "2026-10-27T00:44:02+03:00",
+  "full_local_suite": {
+    "passed": 251,
+    "duration_s": 94.294,
+    "failures": 0
+  },
+  "virtual_dome": {
+    "team": 4,
+    "connected": true,
+    "fresh_nodes": 37,
+    "controls": [
+      {
+        "at": "2026-10-26T23:25:37.849+03:00",
+        "source": "rag",
+        "request": {
+          "type": "control",
+          "node_id": "smart_panel_01",
+          "action": "line_on",
+          "value": 7
+        },
+        "ack": {
+          "success": true,
+          "mode": "virtual",
+          "request_id": "2"
+        },
+        "outcome": "STATE_CONFIRMED",
+        "updated_at": 1793046309.927,
+        "line_state": "ON",
+        "protection_state": "ARMED",
+        "alarm": false
+      },
+      {
+        "at": "2026-10-26T23:26:41.241+03:00",
+        "source": "rag",
+        "request": {
+          "type": "control",
+          "node_id": "smart_panel_01",
+          "action": "line_off",
+          "value": 7
+        },
+        "ack": {
+          "success": true,
+          "mode": "virtual",
+          "request_id": "4"
+        },
+        "outcome": "STATE_CONFIRMED",
+        "updated_at": 1793046373.927,
+        "line_state": "OFF",
+        "protection_state": "ARMED",
+        "alarm": false
+      },
+      {
+        "at": "2026-10-26T23:28:57.697+03:00",
+        "source": "manual_api",
+        "request": {
+          "type": "control",
+          "node_id": "smart_panel_01",
+          "action": "line_on",
+          "value": 7
+        },
+        "ack": {
+          "success": true,
+          "mode": "virtual",
+          "request_id": "8"
+        },
+        "outcome": "STATE_CONFIRMED",
+        "updated_at": 1793046509.927,
+        "line_state": "ON",
+        "protection_state": "ARMED",
+        "alarm": false
+      },
+      {
+        "at": "2026-10-26T23:30:06.723+03:00",
+        "source": "manual_api",
+        "request": {
+          "type": "control",
+          "node_id": "smart_panel_01",
+          "action": "line_off",
+          "value": 7
+        },
+        "ack": {
+          "success": true,
+          "mode": "virtual",
+          "request_id": "10"
+        },
+        "outcome": "STATE_CONFIRMED",
+        "updated_at": 1793046581.927,
+        "line_state": "OFF",
+        "protection_state": "ARMED",
+        "alarm": false
+      }
+    ],
+    "final_lighting_state_of_test": "OFF",
+    "current_lighting_state": "OFF",
+    "persistent_directives_after_one_off_test": 0,
+    "persistent_overrides_after_one_off_test": 0
+  },
+  "model_to_api_bridge": {
+    "test_count": 10,
+    "positive_scenarios": 8,
+    "rejected_model_cases": 11,
+    "active_protection_cases": 1,
+    "scope": "isolated_fake_socket"
+  },
+  "stress": {
+    "schema_version": 1,
+    "generated_at": "2026-10-26T21:43:19.203020+00:00",
+    "scope": "isolated_synthetic_transport_and_runtime",
+    "network_calls": 0,
+    "provider_calls": 0,
+    "real_or_virtual_equipment_commands": 0,
+    "tests_run": 5,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "total_duration_s": 9.140596,
+    "measurements": [
+      {
+        "case": "transport_burst",
+        "passed": true,
+        "duration_s": 0.22114,
+        "frames_injected": 5000,
+        "retained_timestamps": [
+          5000,
+          5001
+        ],
+        "queue_capacity": 2,
+        "dropped_old_frames": 4999,
+        "receiver_alive": true
+      },
+      {
+        "case": "runtime_burst_with_delayed_model_and_transient_smoke",
+        "passed": true,
+        "duration_s": 1.417718,
+        "frames_injected": 500,
+        "newest_timestamp": 3000,
+        "latest_frame_received_before_model_release": true,
+        "processing_to_latest_s": 1.378927,
+        "analysis_queue_capacity": 1,
+        "ui_subscriber_capacity": 16,
+        "hazard_latched": true,
+        "controls_sent": 0
+      },
+      {
+        "case": "unknown_outcome_reconnect_cycles",
+        "passed": true,
+        "duration_s": 1.709953,
+        "explicit_requests": 10,
+        "reconnects": 10,
+        "controls_sent": 10,
+        "automatic_replays": 0,
+        "old_session_analysis_rejected": 10
+      },
+      {
+        "case": "parallel_reverse_responses",
+        "passed": true,
+        "duration_s": 2.631937,
+        "concurrent_requests": 12,
+        "matching_responses": 12,
+        "pending_remaining": 0,
+        "min_send_gap_s": 0.205472,
+        "configured_max_rate_per_s": 5
+      },
+      {
+        "case": "conflicting_manual_plan_burst",
+        "passed": true,
+        "duration_s": 0.872538,
+        "concurrent_plans": 24,
+        "superseded_plans": 23,
+        "controls_sent": 1,
+        "final_action": "line_off",
+        "final_state": "OFF",
+        "confirmed_updated_at": 1008.0,
+        "ack_success": true,
+        "persisted_directives": 0,
+        "persisted_overrides": 0,
+        "previous_commands_in_future_model_context": 0
+      }
+    ],
+    "limits": [
+      "Synthetic sockets, telemetry and model gates; not server load testing",
+      "Timing is local observation, not a throughput/SLA guarantee"
+    ]
+  },
+  "generated_crisis": {
+    "passed": true,
+    "scenario": "FUME_STOPPED during declared soldering; power present, motor OK, no smoke, protections ARMED",
+    "chosen_runbook": "start_fume",
+    "provider_calls": 1,
+    "model_latency_ms": 2734,
+    "effect_span_s": 8.246,
+    "outcome": "VERIFIED_SUCCESS",
+    "scope": "SYNTHETIC_LOCAL_ACTUATOR_WITH_REAL_DEEPSEEK_RAG",
+    "dome_commands": 0
+  },
+  "novel_stress": {
+    "schema_version": 1,
+    "run": "20261026T201600Z-53e009",
+    "passed": true,
+    "scope": "ISOLATED_SYNTHETIC_STRESS_WITH_REAL_DEEPSEEK",
+    "scenario": "ACK success with cached positive telemetry and delayed actuator startup",
+    "novelty_claim": "Designed combination of existing failure protections; not a claim that constituent failures were undocumented.",
+    "dome_commands_sent": 0,
+    "physical_equipment_tested": false,
+    "planner": {
+      "runbook_id": "start_fume",
+      "diagnosis": "Вытяжка fume_extraction_01 выключена (enabled=false, fan_rpm=0, airflow_pct=0), тревоги и ошибки двигателя нет (alarm=false, motor_state=OK). Линия 1 щитка под питанием, защита ARMED, блокировки нет. Оператор выполняет пайку, поэтому вытяжка необходима и есть основание для запуска.",
+      "evidence_ids": [
+        "obs:fume_extraction_01.enabled",
+        "obs:fume_extraction_01.alarm",
+        "obs:smart_panel_01.lines"
+      ],
+      "checks": [
+        "Убедиться по свежим меткам, что линия 1 остаётся под питанием и protection_state=ARMED, lockout_remaining_s=0",
+        "Проверить отсутствие alarm и motor_state не OVERHEAT перед turn_on",
+        "После turn_on проверить на новых метках enabled=true, fan_rpm>0, airflow_pct>0 и alarm=false; ACK без изменения состояния не считать успехом",
+        "Если вытяжка включена, но поток не создаётся, перейти к inspect_fume_mechanical"
+      ],
+      "model": "deepseek-flash",
+      "served_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 4885,
+        "completion_tokens": 261,
+        "total_tokens": 5146
+      },
+      "latency_ms": 3031,
+      "source": "llm"
+    },
+    "retrieved_source_ids": [
+      "doc:72e3beb8874f343dfa38ffb72bade084117d913c53403747fde3f0a5aff9e1b7",
+      "doc:6734258a83a47bad28d7cecb159e09dacdccb5804b01f1279515915f6140ab20",
+      "doc:ded9e2a590006db330365bf12a868fb7f4149c78b929625a57d3fefb9d8ff45d",
+      "doc:86132d84bd55b1f20aed83cab98ee46e9e38d44fb9a9e546e30e2a4600e739c7",
+      "doc:faac649a72e8c8cb1e8a32f12e6821054ef2d2f1b80b1f948c144a1152c4e229",
+      "doc:4f8ef2ff2292893b01644c1f87fcfb6948d7acf1e21c269462c84a2bc34b61b8",
+      "doc:d428e90e4e12059268cec18b10a657a94d7d00f95135798092ef0d371b1f13db",
+      "doc:d03070ba1312479a7435a3a0d72c3e4e8f7f402c86ecfbab7cca41fa8420e39d"
+    ],
+    "before_actual_effect": {
+      "duplicate_or_out_of_order_frames": 100,
+      "ignored_duplicate_frames": 100,
+      "duplicate_burst_ms": 32.0,
+      "cached_positive_frames": 3,
+      "counted_positive_verification_observations": 0,
+      "fresh_negative_frames": 1,
+      "false_success_count": 0,
+      "actuator_command_count": 1
+    },
+    "delayed_recovery": {
+      "observations": [
+        {
+          "timestamp": 1793045770.6089644,
+          "updated_at": 1793045770.6089644,
+          "verified_success_count": 0,
+          "wall_elapsed_s": 3.704
+        },
+        {
+          "timestamp": 1793045774.7428782,
+          "updated_at": 1793045774.7428782,
+          "verified_success_count": 0,
+          "wall_elapsed_s": 7.829
+        },
+        {
+          "timestamp": 1793045778.8695996,
+          "updated_at": 1793045778.8695996,
+          "verified_success_count": 1,
+          "wall_elapsed_s": 11.969
+        }
+      ],
+      "observation_span_s": 8.261,
+      "outcome": {
+        "attempt_id": "29eecc355ec74629b82b85cc29607a14",
+        "incident_id": "e373b029b3c74113b694d1c94efd9514",
+        "outcome": "VERIFIED_SUCCESS",
+        "evidence": {
+          "actual_execution": true,
+          "effect_confirmed": true,
+          "fresh_observations": 3,
+          "post_timestamp": 1793045778.8695996,
+          "reason": "all_steps_verified_by_fresh_stable_observations",
+          "stable_window_s": 8.0,
+          "verified_steps": [
+            {
+              "request": {
+                "type": "control",
+                "node_id": "fume_extraction_01",
+                "action": "turn_on"
+              },
+              "observations": [
+                1793045770.6089644,
+                1793045774.7428782,
+                1793045778.8695996
+              ],
+              "effect_confirmed": true
+            }
+          ]
+        }
+      },
+      "actuator_commands": [
+        {
+          "type": "control",
+          "node_id": "fume_extraction_01",
+          "action": "turn_on"
+        }
+      ],
+      "memory_stats": {
+        "successes": 1,
+        "failures": 0,
+        "unknown": 0,
+        "verified_attempts": 1,
+        "score": 0.3333333333333333
+      }
+    },
+    "mechanical_failure_branch": {
+      "initial_plan": "Reused the actual validated DeepSeek start_fume result; no additional provider call",
+      "critical_fault_detected": true,
+      "pending_outcomes": [
+        {
+          "attempt_id": "eebaf53ad97f48e4963d5b09cb38442c",
+          "incident_id": "3142c54315c8476798bc0c00b9bc7a09",
+          "outcome": "UNKNOWN",
+          "evidence": {
+            "actual_execution": true,
+            "effect_confirmed": false,
+            "fresh_observations": 0,
+            "post_timestamp": 1793045779.889042,
+            "reason": "CRITICAL_INCIDENT_HAS_PRIORITY",
+            "stable_window_s": 8.0,
+            "verified_steps": []
+          }
+        }
+      ],
+      "false_success_after_late_positive": 0,
+      "actuator_command_count": 1,
+      "memory_stats": {
+        "successes": 0,
+        "failures": 0,
+        "unknown": 1,
+        "verified_attempts": 0,
+        "score": 0.0
+      },
+      "safety_diagnosis": "Critical gate closes pending verification; new mechanical diagnosis uses reviewed fallback without another LLM call."
+    },
+    "duration_s": 12.407,
+    "provider_calls": [
+      {
+        "destination": "https://api.deepseek.com/chat/completions",
+        "request_bytes": 17833,
+        "ok_http": true,
+        "latency_ms": 3031
+      }
+    ],
+    "limits": [
+      "Mock actuator recovery only; not a physical mechanical repair",
+      "Training DeepSeek alias does not establish exact final-event model compliance"
+    ]
+  },
+  "non_failure_precursor": {
+    "generated_at": "2026-10-26T20:27:01.025265+00:00",
+    "before": {
+      "scope": "isolated_synthetic_no_failure_trend",
+      "network_calls": 0,
+      "provider_calls": 0,
+      "equipment_controls": 0,
+      "series": {
+        "fan_current_a": [
+          0.21,
+          0.24,
+          0.27,
+          0.3
+        ],
+        "fan_state": "ON",
+        "fan_mode": "ON",
+        "fan_rpm": 1800,
+        "inverter_temp_c": 40,
+        "load_power_w": 200
+      },
+      "warning_detected": true,
+      "warning_severity": "warning",
+      "warning_cleared_after_flat_samples": true,
+      "observational_memory_supported": false,
+      "observation_in_next_chat_context": false,
+      "observation_in_chat_after_restart": false
+    },
+    "after": {
+      "scope": "isolated_synthetic_no_failure_trend",
+      "network_calls": 0,
+      "provider_calls": 0,
+      "equipment_controls": 0,
+      "series": {
+        "fan_current_a": [
+          0.21,
+          0.24,
+          0.27,
+          0.3
+        ],
+        "fan_state": "ON",
+        "fan_mode": "ON",
+        "fan_rpm": 1800,
+        "inverter_temp_c": 40,
+        "load_power_w": 200
+      },
+      "warning_detected": true,
+      "warning_severity": "warning",
+      "warning_cleared_after_flat_samples": true,
+      "observational_memory_supported": true,
+      "observation_in_next_chat_context": true,
+      "observation_in_chat_after_restart": true,
+      "retained_observation_count": 1,
+      "rag_observation_text_bytes": 1205,
+      "stored_outcomes": [
+        "OBSERVED_TREND_UNCONFIRMED"
+      ],
+      "repair_case_count": 0
+    }
+  },
+  "post_restart_live_rag": {
+    "scope": "virtual_dome_informational_chat_after_process_restart",
+    "message_kind": "request",
+    "question": "Что ранее замечено по току вентилятора инвертора? Доказывает ли наблюдавшийся рост тока поломку?",
+    "answer": "Рост тока вентилятора сам по себе не доказывает поломку. В сохранённом наблюдении зафиксирован лишь тренд: ток вырос примерно с 0.251–0.254 А до 0.257 А при режиме AUTO и температуре около 40 °C; результат прямо помечен как неподтверждённый, ремонт и его эффективность не проверялись.\n\nИсторический дневник от 17.10 описывает похожую картину: рост тока, гул подшипника, затем остановку вентилятора и нагрев до 54–56 °C; вентилятор заменили, но это человеческий рассказ, а не доказательство причинности. Другие эпизоды с ошибками инвертора тоже не подтверждают причину, а исправный архивный снимок показывает ток 0.455 А при работающем вентиляторе — значит, абсолютное значение тока без привязки к режиму и температуре малоинформативно.\n\nСейчас по свежей телеметрии solar_inverter_01 в норме: температура 38.8 °C, ошибки нет, fan_state=OFF при fan_mode=AUTO — это допустимо при такой температуре, а не признак отказа. Отдельно стоит учитывать, что детально проверены только пять узлов, поэтому по остальным устройствам выводов об исправности не делаю.\n\nДля проверки нужен новый ряд fan_current_a вместе с температурой и нагрузкой при включённом вентиляторе: устойчивый рост тока при одинаковых условиях и рост температуры будут основанием для осмотра вентилятора оператором; разовый скачок или изменение нагрузки — нет. Команд на управление не предлагаю, запрос диагностический.",
+    "model": "deepseek-flash",
+    "latency_s": 7.046,
+    "equipment_controls": 0,
+    "observed_trend_retrieved": true,
+    "used_sources": [
+      {
+        "id": "observation:5266fc216ecf424ca4ae117ebddf8d2e",
+        "kind": "observation",
+        "source": "sqlite:output\\web_acceptance\\cases.sqlite#observation=5266fc216ecf424ca4ae117ebddf8d2e",
+        "section": "Ранее замеченный тренд тока вентилятора",
+        "outcome": "OBSERVED_TREND_UNCONFIRMED",
+        "score": 1.0413934426229507,
+        "category": "observed_trend",
+        "source_id": "observation:5266fc216ecf424ca4ae117ebddf8d2e",
+        "episode_id": null,
+        "observation_code": "INVERTER_FAN_CURRENT_RISING",
+        "target": "solar_inverter_01",
+        "signal": "solar_inverter_01.fan_current_a",
+        "first_at": 1793047337.927272,
+        "last_at": 1793049281.927272,
+        "observation_count": 5,
+        "provenance": {
+          "type": "observed_trend",
+          "environment": "virtual:competition:team4",
+          "verification": "OBSERVED_TREND_UNCONFIRMED",
+          "first_at": 1793047337.927272,
+          "last_at": 1793049281.927272,
+          "actual_execution": false,
+          "repair_verified": false
+        },
+        "repair_causality": "UNPROVEN",
+        "excerpt": "Вентилятор инвертора: ток рос при одинаковом режиме. Локальное наблюдение отклонения; факт поломки не установлен. Код INVERTER_FAN_CURRENT_RISING. Узел solar_inverter_01, параметр solar_inverter_01.fan_current_a. Первое окно: [0.251, 0.253, 0.254]; последнее сохранённое окно: [0.251, 0.252, 0.253, 0.257]. Контекст: {\"fan_mode\": \"AUTO\", \"fan_state\": \"ON\", \"inverter_temp_c\": 40.6, \"load_power_w\": 218.7}. Время телеметрии первого/последнего окна: 1793047337.927272/1793049281.927272; сохранённых окон: 5. Исход: OBSERVED_TREND_UNCONFIRMED. Тренд сам по себе не доказывает неисправность или её причину. Ремонт и эффективность действий не проверялись; команд и полномочий на управление запись не содер",
+        "instruction_authority": false
+      },
+      {
+        "id": "doc:553d8760c15561dbff10be78b4348d708ede9be161022ca6176d578504e9ea6c",
+        "kind": "document",
+        "source": "C:\\Users\\saksa\\OneDrive\\Документы\\ChatGPT\\Агент _Купол_\\kupol_agent\\knowledge\\history_cases\\historical_logbook.md",
+        "section": "Дневник людей: исторические объяснения и гипотезы / 2026-10-17: Logs/2026-10-17/logbook.jsonl:1",
+        "score": 0.496568947707013,
+        "category": "narrative",
+        "source_id": "narrative:historical_logbook.md#2026-10-17",
+        "episode_id": null,
+        "fault_code": null,
+        "target": null,
+        "provenance": {
+          "type": "narrative",
+          "source_id": "historical_logbook.md",
+          "source_revision": null,
+          "evidence_sources": []
+        },
+        "repair_causality": null,
+        "excerpt": "## 2026-10-17: Logs/2026-10-17/logbook.jsonl:1\nСтатус: HUMAN_NARRATIVE_UNCORROBORATED. Суббота, 17.10. Снаружи 7…25 °C, ясно, ветер до 14 м/с. За день напечатали клипсы, воздуховод; отфрезеровали плату хаба датчиков, плату питания. Вчера около половины восьмого вечера встал вентилятор инвертора: ток вентилятора ноль, температура 44 → 54 °C за 8 минут. Последние два дня ток вентилятора рос, и подшипник гудел — это было оно. Сразу сняли нагрузку: основной свет на аварийный, резервную линию выключили. Максимум был 56 °C, до E02 (80 °C) не дошли. Завтра меняем вентилятор. Ночью water_filter_01 «замёрз»: показания не обновлялись, команды не проходили. Утром сделали reconnect — ожил. Утром поменял",
+        "instruction_authority": false
+      },
+      {
+        "id": "doc:e1f5fc37b4b9b0ec6f96d7dbf59d241e4d1229caa5813580f0cec1b3ad2503e3",
+        "kind": "document",
+        "source": "C:\\Users\\saksa\\OneDrive\\Документы\\ChatGPT\\Агент _Купол_\\kupol_agent\\knowledge\\history_cases\\case_7c369a9a5e85c6770ad6.md",
+        "section": "Исторический эпизод hist:7c369a9a5e85c6770ad6: ENERGY_DEFICIT / Свидетельства",
+        "score": 1.2147050366699508,
+        "category": "historical_episode",
+        "source_id": "hist:7c369a9a5e85c6770ad6",
+        "episode_id": "hist:7c369a9a5e85c6770ad6",
+        "fault_code": "ENERGY_DEFICIT",
+        "target": "solar_inverter_01",
+        "provenance": {
+          "type": "historical_episode",
+          "source_id": "hist:7c369a9a5e85c6770ad6",
+          "source_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+          "evidence_sources": [
+            {
+              "file": "Logs/2026-10-15/telemetry.jsonl",
+              "line": 1151,
+              "timestamp": 1792080600.0,
+              "at": "2026-10-15T19:10:00+03:00",
+              "file_sha256": "c66757c91eb454087c237355a894f1639c05ef9929077c1379453f8cf387c20d"
+            },
+            {
+              "file": "Logs/2026-10-15/telemetry.jsonl",
+              "line": 1152,
+              "timestamp": 1792080660.0,
+              "at": "2026-10-15T19:11:00+03:00",
+              "file_sha256": "c66757c91eb454087c237355a894f1639c05ef9929077c1379453f8cf387c20d"
+            },
+            {
+              "file": "Logs/2026-10-15/telemetry.jsonl",
+              "line": 1170,
+              "timestamp": 1792081740.0,
+              "at": "2026-10-15T19:29:00+03:00",
+              "file_sha256": "c66757c91eb454087c237355a894f1639c05ef9929077c1379453f8cf387c20d"
+            },
+            {
+              "file": "Logs/2026-10-15/telemetry.jsonl",
+              "line": 1171,
+              "timestamp": 1792081800.0,
+              "at": "2026-10-15T19:30:00+03:00",
+              "file_sha256": "c66757c91eb454087c237355a894f1639c05ef9929077c1379453f8cf387c20d"
+            }
+          ]
+        },
+        "repair_causality": "UNPROVEN",
+        "excerpt": "1792081800.0}, \"solar_inverter_01\": {\"balancing_state\": \"IDLE\", \"battery_charge_blocked\": false, \"error\": false, \"error_code\": null, \"fan_current_a\": 0.455, \"fan_state\": \"ON\", \"grid_state\": \"AVAILABLE\", \"inverter_temp_c\": 42.4, \"mode\": \"HYBRID\", \"mppt_state\": \"TRACKING\", \"online\": true, \"output_voltage_v\": 231.5, \"power_deficit_w\": 0.0, \"status\": \"OK\", \"updated_at\": 1792081800.0}}",
+        "instruction_authority": false
+      },
+      {
+        "id": "doc:8dae2142227f75d75e9fc22936aa62da4ddd2d86da6a763bd940602c5cce0148",
+        "kind": "document",
+        "source": "C:\\Users\\saksa\\OneDrive\\Документы\\ChatGPT\\Агент _Купол_\\kupol_agent\\knowledge\\runbooks.md",
+        "section": "Сценарии диагностики Купола / cool_inverter",
+        "score": 0.6336996636438889,
+        "category": "runbook",
+        "source_id": "runbook:runbooks.md",
+        "episode_id": null,
+        "fault_code": null,
+        "target": null,
+        "provenance": {
+          "type": "runbook",
+          "source_id": "runbooks.md",
+          "source_revision": null,
+          "evidence_sources": []
+        },
+        "repair_causality": null,
+        "excerpt": "## cool_inverter\n\n- Подсистемы: `energy`, `thermal`, `power_distribution`, `safety`.\n- Признаки: температура инвертора, ошибки, нагрузка, состояние и ток вентилятора. По API `IL_HEAT` соответствует температуре более 75 °C в течение 120 с; `IL_INV_OVERLOAD` — E07 в течение 120 с. Перегрев и перегрузка различаются.\n- Локализация: `fan_state=OFF` в режиме `AUTO` без перегрева не доказывает неисправность. В полученном исправном снимке вентилятор выключен при 38,9 °C. Если после разрешенного включения вентилятора ток/состояние не меняются, гипотеза механического отказа требует проверки оператора.\n- План: диагностика режима вентилятора, нагрузки и внешних условий; эскалация регулирования или физич",
+        "instruction_authority": false
+      }
+    ],
+    "observation_sources": [
+      {
+        "id": "observation:5266fc216ecf424ca4ae117ebddf8d2e",
+        "kind": "observation",
+        "source": "sqlite:output\\web_acceptance\\cases.sqlite#observation=5266fc216ecf424ca4ae117ebddf8d2e",
+        "section": "Ранее замеченный тренд тока вентилятора",
+        "outcome": "OBSERVED_TREND_UNCONFIRMED",
+        "score": 1.0413934426229507,
+        "category": "observed_trend",
+        "source_id": "observation:5266fc216ecf424ca4ae117ebddf8d2e",
+        "episode_id": null,
+        "observation_code": "INVERTER_FAN_CURRENT_RISING",
+        "target": "solar_inverter_01",
+        "signal": "solar_inverter_01.fan_current_a",
+        "first_at": 1793047337.927272,
+        "last_at": 1793049281.927272,
+        "observation_count": 5,
+        "provenance": {
+          "type": "observed_trend",
+          "environment": "virtual:competition:team4",
+          "verification": "OBSERVED_TREND_UNCONFIRMED",
+          "first_at": 1793047337.927272,
+          "last_at": 1793049281.927272,
+          "actual_execution": false,
+          "repair_verified": false
+        },
+        "repair_causality": "UNPROVEN",
+        "excerpt": "Вентилятор инвертора: ток рос при одинаковом режиме. Локальное наблюдение отклонения; факт поломки не установлен. Код INVERTER_FAN_CURRENT_RISING. Узел solar_inverter_01, параметр solar_inverter_01.fan_current_a. Первое окно: [0.251, 0.253, 0.254]; последнее сохранённое окно: [0.251, 0.252, 0.253, 0.257]. Контекст: {\"fan_mode\": \"AUTO\", \"fan_state\": \"ON\", \"inverter_temp_c\": 40.6, \"load_power_w\": 218.7}. Время телеметрии первого/последнего окна: 1793047337.927272/1793049281.927272; сохранённых окон: 5. Исход: OBSERVED_TREND_UNCONFIRMED. Тренд сам по себе не доказывает неисправность или её причину. Ремонт и эффективность действий не проверялись; команд и полномочий на управление запись не содер",
+        "instruction_authority": false
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 6988,
+      "completion_tokens": 559,
+      "total_tokens": 7547
+    }
+  },
+  "upstream": {
+    "checked_date": "2026-10-26",
+    "repository": "https://github.com/WhiteDots/Dome_RAG",
+    "head_revision": "5e1ec4854ddcccb12efc5f0b4a9bfd94fa190438",
+    "previous_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+    "commits_ahead": 1,
+    "changes": [
+      {
+        "filename": "knowledge/Задание и техкарта.docx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "knowledge/Итог проект пленок Оксида меди.docx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "knowledge/Легенда реактор МКИ 2026.docx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "knowledge/Материалы для подготовки.docx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "knowledge/Окрашивание статья ЮТ.docx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      }
+    ],
+    "telemetry_log_changes": 0,
+    "chemistry_documents_included": false,
+    "reason": "Пользователь исключил химические материалы; автоматизация этого аппарата не предусмотрена.",
+    "historical_log_revision_retained": "a16da2db079cdcb395e354383199effdf5a170b2"
+  },
+  "fixed_issues": [
+    "Unescaped LF/CR inside model JSON strings",
+    "Model duplicated action into type instead of constant control",
+    "One-off messages previously persisted as future directives",
+    "Non-failure trends previously disappeared from future retrieval",
+    "Lone Unicode surrogates and numeric exponent overflow",
+    "Full command gates are repeated after request-rate waiting",
+    "Autonomy setup is available through the web interface without weakening flow and safety gates"
+  ],
+  "adversarial_matrix": {
+    "seed": 20261027,
+    "scope": "synthetic_only",
+    "provider_calls": 0,
+    "equipment_commands": 0,
+    "generated_model_mutations": 2400,
+    "rejected_model_mutations": 2400,
+    "accepted_benign_newline_variants": 120,
+    "valid_boundary_cases": 45,
+    "autonomy_payload_cases": 321,
+    "rejected_autonomy_payloads": 321,
+    "unexpected": 0,
+    "invalid_unicode_cases": 256,
+    "rejected_invalid_unicode_cases": 256,
+    "valid_unicode_pairs": 1,
+    "dynamic_catalog_revocations": 2,
+    "planner_unicode_cases": 64,
+    "numeric_overflow_cases": 16,
+    "deep_json_cases": 3,
+    "mutation_families": {
+      "unknown_response_fields": 100,
+      "unknown_command_fields": 100,
+      "action_in_wire_type": 100,
+      "unknown_node": 100,
+      "unavailable_or_unsafe_action": 100,
+      "wrong_line_value_type": 100,
+      "line_outside_contract": 100,
+      "speed_wrong_type": 100,
+      "speed_outside_contract": 100,
+      "nonfinite_numbers": 100,
+      "forged_sources": 100,
+      "duplicate_commands": 100,
+      "read_only_cannot_control": 100,
+      "duplicate_json_keys": 100,
+      "invalid_unicode_escape": 100,
+      "raw_control_characters": 100,
+      "invalid_backslash_newline": 100,
+      "outside_json_text": 100,
+      "wrong_root_type": 100,
+      "missing_mandatory_fields": 100,
+      "invalid_answer": 100,
+      "commands_not_array": 100,
+      "invalid_sources_shape": 100,
+      "parameter_or_filename_injection": 100
+    },
+    "duration_s": 8.672922,
+    "unit_test_methods": 8,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "generated_cases_total": 3228
+  },
+  "portable_validation": {
+    "passed": true,
+    "generated_at": "2026-10-26T21:42:06.756191+00:00",
+    "scope": "portable_local_acceptance_no_model_or_equipment",
+    "candidate": "tmp/portable_acceptance_040",
+    "provider_calls": 0,
+    "equipment_commands": 0,
+    "full_suite": {
+      "passed": 251,
+      "duration_s": 89.637,
+      "failures": 0,
+      "errors": 0
+    },
+    "python_version": "3.14.10",
+    "runtime": {
+      "python_version": "3.14.10",
+      "executable": "runtime/python/python.exe",
+      "paths": [
+        "runtime/python/python314.zip",
+        "runtime/python",
+        ".",
+        "vendor"
+      ],
+      "app_origin": "kupol_agent/web.py",
+      "ssl": "OpenSSL 3.5.9 29 Sep 2026",
+      "sqlite": "3.50.4",
+      "dependencies": {
+        "aiohttp": "3.14.5",
+        "websockets": "17.3",
+        "aiohappyeyeballs": "2.7.1",
+        "aiosignal": "1.4.0",
+        "attrs": "26.1.0",
+        "frozenlist": "1.8.0",
+        "idna": "3.20",
+        "multidict": "7.2.1",
+        "propcache": "0.5.4",
+        "typing_extensions": "4.16.0",
+        "yarl": "1.25.1"
+      }
+    },
+    "python_path_isolated": true,
+    "app_import_from_foreign_cwd": true,
+    "pth_text": "python314.zip\n.\n../../\n../../vendor\n",
+    "http_smoke": {
+      "passed": true,
+      "port": 8081,
+      "state": "disconnected",
+      "launcher": "start_web.cmd",
+      "bundled_python_process_verified": true,
+      "credentials_present": false,
+      "ui_sections": [
+        "chatPanel",
+        "connectionForm",
+        "directControlSend",
+        "filesView",
+        "historyView",
+        "overviewView",
+        "telemetryView",
+        "uploadForm"
+      ],
+      "static_js_hash_matched": true,
+      "autonomy_without_configuration_status": 400,
+      "invalid_configuration_status": 400,
+      "owned_server_stopped": true
+    },
+    "launchers": {
+      "start_web.cmd": {
+        "passed": true,
+        "exit_code": 0,
+        "help_displayed": true,
+        "bundled_runtime_available": true,
+        "system_python_on_path": false,
+        "installation_attempted": false
+      },
+      "start_agent.cmd": {
+        "passed": true,
+        "exit_code": 0,
+        "help_displayed": true,
+        "bundled_runtime_available": true,
+        "system_python_on_path": false,
+        "installation_attempted": false
+      },
+      "check_dome.cmd": {
+        "passed": true,
+        "exit_code": 0,
+        "help_displayed": true,
+        "bundled_runtime_available": true,
+        "system_python_on_path": false,
+        "installation_attempted": false
+      },
+      "emergency_light.cmd": {
+        "passed": true,
+        "exit_code": 0,
+        "help_displayed": true,
+        "bundled_runtime_available": true,
+        "system_python_on_path": false,
+        "installation_attempted": false
+      }
+    },
+    "stress": {
+      "passed": 5,
+      "duration_s": 9.140596,
+      "python_version": "3.14.10",
+      "external_network_calls": 0,
+      "execution": "runtime/python/python.exe -X utf8 tests/test_stress.py",
+      "direct_script": true
+    },
+    "hashes": {
+      "listed_files": 201,
+      "matched_copied_source": true,
+      "adversarial_matrix_matched": true,
+      "current_root_changes": [
+        "AGENTS.md"
+      ]
+    }
+  },
+  "portable_credentialless_tls": {
+    "https": {
+      "status": 426,
+      "reason": "Upgrade Required"
+    },
+    "websocket": {
+      "opened": true,
+      "credentials_sent": false
+    },
+    "deepseek_https": {
+      "status": 401,
+      "credentials_sent": false,
+      "model_generation_requested": false
+    }
+  },
+  "limits": [
+    "Synthetic crises do not demonstrate physical repairs",
+    "Manual state confirmation is not stable automatic repair verification",
+    "Available DeepSeek version is used as explicitly requested by the user",
+    "Real-object minimum flow criteria require operator configuration"
+  ]
+}

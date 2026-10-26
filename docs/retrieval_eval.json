@@ -1,0 +1,753 @@
+{
+  "schema_version": 1,
+  "k": 5,
+  "source_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+  "label_status": "author_drafted_source_reviewed_not_independently_adjudicated",
+  "scope": "Small fixed retrieval diagnostic set, not a universal benchmark or safety validation. Questions are paraphrases, not copied headings. Telemetry values are constructed variants of source patterns, not new real observations. Heldout labels are frozen before measuring this evaluation run. No DeepSeek calls occur.",
+  "summary": {
+    "all": {
+      "legacy_bm25": {
+        "queries": 10,
+        "hit_at_k": 0.2,
+        "recall_at_k": 0.2,
+        "mrr_at_k": 0.15
+      },
+      "expanded_without_live_context": {
+        "queries": 10,
+        "hit_at_k": 1.0,
+        "recall_at_k": 0.95,
+        "mrr_at_k": 0.77
+      },
+      "contextual": {
+        "queries": 10,
+        "hit_at_k": 1.0,
+        "recall_at_k": 0.95,
+        "mrr_at_k": 0.8699999999999999
+      }
+    },
+    "development": {
+      "legacy_bm25": {
+        "queries": 4,
+        "hit_at_k": 0.0,
+        "recall_at_k": 0.0,
+        "mrr_at_k": 0.0
+      },
+      "expanded_without_live_context": {
+        "queries": 4,
+        "hit_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.875
+      },
+      "contextual": {
+        "queries": 4,
+        "hit_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "mrr_at_k": 0.875
+      }
+    },
+    "heldout": {
+      "legacy_bm25": {
+        "queries": 6,
+        "hit_at_k": 0.3333333333333333,
+        "recall_at_k": 0.3333333333333333,
+        "mrr_at_k": 0.25
+      },
+      "expanded_without_live_context": {
+        "queries": 6,
+        "hit_at_k": 1.0,
+        "recall_at_k": 0.9166666666666666,
+        "mrr_at_k": 0.7000000000000001
+      },
+      "contextual": {
+        "queries": 6,
+        "hit_at_k": 1.0,
+        "recall_at_k": 0.9166666666666666,
+        "mrr_at_k": 0.8666666666666667
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "delayed_co2",
+      "split": "heldout",
+      "query": "Главный датчик резко вырос, а два спокойных запаздывают на четверть и полчаса. Значит ли это ложную тревогу?",
+      "expected_source_ids": [
+        "hist:58a73822ce0db94e1287",
+        "hist:cc2adfb04a31379b9296"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "reference:09_faults.md",
+            "narrative:historical_logbook.md#2026-10-16",
+            "runbook:runbooks.md",
+            "reference:06_microclimate.md",
+            "narrative:historical_logbook.md#2026-10-15"
+          ],
+          "categories": {
+            "reference": 2,
+            "narrative": 2,
+            "runbook": 1
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "found": [
+            "hist:58a73822ce0db94e1287",
+            "hist:cc2adfb04a31379b9296"
+          ],
+          "source_ids": [
+            "runbook:runbooks.md",
+            "hist:58a73822ce0db94e1287",
+            "hist:cc2adfb04a31379b9296",
+            "reference:09_faults.md",
+            "narrative:historical_logbook.md#2026-10-16"
+          ],
+          "categories": {
+            "runbook": 1,
+            "historical_episode": 2,
+            "reference": 1,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:58a73822ce0db94e1287",
+            "hist:cc2adfb04a31379b9296"
+          ],
+          "source_ids": [
+            "hist:58a73822ce0db94e1287",
+            "hist:cc2adfb04a31379b9296",
+            "runbook:runbooks.md",
+            "reference:03_Требования_к_агенту.md",
+            "reference:09_faults.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "runbook": 1,
+            "reference": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "smoke_short",
+      "split": "heldout",
+      "query": "Пожарный датчик в мастерской тревожился меньше минуты, но на минутном снимке всё спокойно. Можно ли исключить тревогу?",
+      "expected_source_ids": [
+        "hist:7d6dcbda8cfdcf184c3d"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:7d6dcbda8cfdcf184c3d"
+          ],
+          "source_ids": [
+            "hist:7d6dcbda8cfdcf184c3d",
+            "narrative:historical_logbook.md#2026-10-16",
+            "reference:09_faults.md",
+            "reference:09_faults.md",
+            "reference:04_telemetry.md"
+          ],
+          "categories": {
+            "historical_episode": 1,
+            "narrative": 1,
+            "reference": 3
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "found": [
+            "hist:7d6dcbda8cfdcf184c3d"
+          ],
+          "source_ids": [
+            "hist:044d6fb10a7266529230",
+            "hist:7d6dcbda8cfdcf184c3d",
+            "narrative:historical_logbook.md#2026-10-16",
+            "reference:01_API.md",
+            "reference:09_faults.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "narrative": 1,
+            "reference": 2
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:7d6dcbda8cfdcf184c3d"
+          ],
+          "source_ids": [
+            "hist:7d6dcbda8cfdcf184c3d",
+            "hist:044d6fb10a7266529230",
+            "narrative:historical_logbook.md#2026-10-16",
+            "reference:01_API.md",
+            "reference:09_faults.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "narrative": 1,
+            "reference": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "e09_humidity",
+      "split": "heldout",
+      "query": "Инвертор сообщил E09 после сырой ночи. Корпус не горячий. Какие похожие случаи помогут разобраться?",
+      "expected_source_ids": [
+        "hist:282570b43a760f3c0ce3"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "narrative:historical_logbook.md#2026-10-14",
+            "reference:03_Требования_к_агенту.md",
+            "reference:05_production.md",
+            "reference:10_procedures.md",
+            "reference:04_telemetry.md"
+          ],
+          "categories": {
+            "narrative": 1,
+            "reference": 4
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:282570b43a760f3c0ce3"
+          ],
+          "source_ids": [
+            "hist:282570b43a760f3c0ce3",
+            "hist:e99c3af0bb44a3f14730",
+            "reference:01_API.md",
+            "narrative:historical_logbook.md#2026-10-14",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:282570b43a760f3c0ce3"
+          ],
+          "source_ids": [
+            "hist:282570b43a760f3c0ce3",
+            "hist:e99c3af0bb44a3f14730",
+            "reference:01_API.md",
+            "narrative:historical_logbook.md#2026-10-14",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "false_webhook_finish",
+      "split": "heldout",
+      "query": "На панели печать закончена, а деталь ещё строится. Как разобраться в противоречии?",
+      "expected_source_ids": [
+        "hist:f15e4d6fefec3f712580"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "narrative:historical_logbook.md#2026-10-17",
+            "narrative:historical_logbook.md#2026-10-14",
+            "narrative:historical_logbook.md#2026-10-12",
+            "narrative:historical_logbook.md#2026-10-15",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "narrative": 4,
+            "reference": 1
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:f15e4d6fefec3f712580"
+          ],
+          "source_ids": [
+            "hist:f15e4d6fefec3f712580",
+            "hist:2cd052fabe6569938673",
+            "reference:05_production.md",
+            "reference:01_API.md",
+            "narrative:historical_logbook.md#2026-10-14"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:f15e4d6fefec3f712580"
+          ],
+          "source_ids": [
+            "hist:f15e4d6fefec3f712580",
+            "hist:24df87974c7b6bb4c8ef",
+            "reference:05_production.md",
+            "reference:01_API.md",
+            "narrative:historical_logbook.md#2026-10-14"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "line6_sensor_noise",
+      "split": "heldout",
+      "query": "Обычный свет часто мигает, одновременно скачут показания климатических датчиков. Было ли подобное?",
+      "expected_source_ids": [
+        "hist:75008e01604d34346c3b"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "reference:06_microclimate.md",
+            "reference:06_microclimate.md",
+            "narrative:historical_logbook.md#2026-10-17",
+            "narrative:historical_logbook.md#2026-10-14",
+            "reference:06_microclimate.md"
+          ],
+          "categories": {
+            "reference": 3,
+            "narrative": 2
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:75008e01604d34346c3b"
+          ],
+          "source_ids": [
+            "hist:75008e01604d34346c3b",
+            "hist:15e147d74322d4b569a4",
+            "narrative:historical_logbook.md#2026-10-14",
+            "reference:01_API.md",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "narrative": 1,
+            "reference": 2
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:75008e01604d34346c3b"
+          ],
+          "source_ids": [
+            "hist:75008e01604d34346c3b",
+            "hist:734fccef9ed18541e8f5",
+            "narrative:historical_logbook.md#2026-10-14",
+            "reference:01_API.md",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "narrative": 1,
+            "reference": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "inverter_fan_stop",
+      "split": "heldout",
+      "query": "Вентилятор инвертора перестал вращаться, его ток нулевой, а температура растёт при небольшой нагрузке. Нужна история похожего случая.",
+      "expected_source_ids": [
+        "narrative:historical_logbook.md#2026-10-17",
+        "reference:03_energy.md"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "found": [
+            "narrative:historical_logbook.md#2026-10-17",
+            "reference:03_energy.md"
+          ],
+          "source_ids": [
+            "reference:09_faults.md",
+            "narrative:historical_logbook.md#2026-10-17",
+            "narrative:historical_logbook.md#2026-10-18",
+            "reference:03_energy.md",
+            "reference:03_energy.md"
+          ],
+          "categories": {
+            "reference": 3,
+            "narrative": 2
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.2,
+          "found": [
+            "narrative:historical_logbook.md#2026-10-17"
+          ],
+          "source_ids": [
+            "hist:282570b43a760f3c0ce3",
+            "hist:e99c3af0bb44a3f14730",
+            "reference:09_faults.md",
+            "runbook:runbooks.md",
+            "narrative:historical_logbook.md#2026-10-17"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 1,
+            "runbook": 1,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 0.5,
+          "reciprocal_rank": 0.2,
+          "found": [
+            "narrative:historical_logbook.md#2026-10-17"
+          ],
+          "source_ids": [
+            "hist:282570b43a760f3c0ce3",
+            "hist:e99c3af0bb44a3f14730",
+            "reference:01_API.md",
+            "reference:09_faults.md",
+            "narrative:historical_logbook.md#2026-10-17"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "warehouse_smoke",
+      "split": "development",
+      "query": "На складе появился дым, растёт CO, тушение активно. Где найти схожий кризис?",
+      "expected_source_ids": [
+        "hist:044d6fb10a7266529230"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "narrative:historical_logbook.md#2026-10-18",
+            "narrative:historical_logbook.md#2026-10-18",
+            "reference:06_microclimate.md",
+            "runbook:runbooks.md",
+            "reference:03_Требования_к_агенту.md"
+          ],
+          "categories": {
+            "narrative": 2,
+            "reference": 2,
+            "runbook": 1
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:044d6fb10a7266529230"
+          ],
+          "source_ids": [
+            "hist:044d6fb10a7266529230",
+            "hist:42fd8578dbda3058ad35",
+            "narrative:historical_logbook.md#2026-10-18",
+            "reference:01_API.md",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "narrative": 1,
+            "reference": 2
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:044d6fb10a7266529230"
+          ],
+          "source_ids": [
+            "hist:044d6fb10a7266529230",
+            "hist:7d6dcbda8cfdcf184c3d",
+            "narrative:historical_logbook.md#2026-10-18",
+            "reference:01_API.md",
+            "reference:01_API.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "narrative": 1,
+            "reference": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "synchronous_co2",
+      "split": "development",
+      "query": "Воздух ухудшился: все три датчика сейчас показывают высокий углекислый газ. На что похожа ситуация?",
+      "expected_source_ids": [
+        "hist:47ba156d9ccd8559499b"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "reference:03_energy.md",
+            "reference:06_microclimate.md",
+            "reference:01_API.md",
+            "reference:06_microclimate.md",
+            "reference:06_microclimate.md"
+          ],
+          "categories": {
+            "reference": 5
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:47ba156d9ccd8559499b"
+          ],
+          "source_ids": [
+            "hist:47ba156d9ccd8559499b",
+            "hist:cc2adfb04a31379b9296",
+            "reference:01_API.md",
+            "reference:06_microclimate.md",
+            "narrative:historical_logbook.md#2026-10-14"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "found": [
+            "hist:47ba156d9ccd8559499b"
+          ],
+          "source_ids": [
+            "hist:5a49212065325863c7a5",
+            "hist:47ba156d9ccd8559499b",
+            "reference:01_API.md",
+            "reference:03_Требования_к_агенту.md",
+            "reference:06_microclimate.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "supply_low_flow",
+      "split": "development",
+      "query": "Приток включён, но свежего воздуха мало, фильтр почти забит. Какой исторический отказ ближе?",
+      "expected_source_ids": [
+        "hist:ec7f849bcf842519cc6d"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "reference:09_faults.md",
+            "runbook:runbooks.md",
+            "runbook:runbooks.md",
+            "reference:06_microclimate.md",
+            "reference:10_procedures.md"
+          ],
+          "categories": {
+            "reference": 3,
+            "runbook": 2
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:ec7f849bcf842519cc6d"
+          ],
+          "source_ids": [
+            "hist:ec7f849bcf842519cc6d",
+            "hist:47ba156d9ccd8559499b",
+            "reference:01_API.md",
+            "reference:01_API.md",
+            "narrative:historical_logbook.md#2026-10-18"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:ec7f849bcf842519cc6d"
+          ],
+          "source_ids": [
+            "hist:ec7f849bcf842519cc6d",
+            "hist:47ba156d9ccd8559499b",
+            "reference:01_API.md",
+            "reference:01_API.md",
+            "runbook:runbooks.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "runbook": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "energy_deficit",
+      "split": "development",
+      "query": "Заряд батареи резко низкий, мощности не хватает, производство теряет питание. Какой опыт полезен?",
+      "expected_source_ids": [
+        "hist:7c369a9a5e85c6770ad6"
+      ],
+      "results": {
+        "legacy_bm25": {
+          "hit_at_k": false,
+          "recall_at_k": 0.0,
+          "reciprocal_rank": 0,
+          "found": [],
+          "source_ids": [
+            "reference:03_energy.md",
+            "reference:03_energy.md",
+            "manual_experience:2026-10-26_emergency_lighting.md",
+            "reference:06_microclimate.md",
+            "reference:03_energy.md"
+          ],
+          "categories": {
+            "reference": 4,
+            "manual_experience": 1
+          }
+        },
+        "expanded_without_live_context": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 0.5,
+          "found": [
+            "hist:7c369a9a5e85c6770ad6"
+          ],
+          "source_ids": [
+            "hist:d33cb1956931b5a81098",
+            "hist:7c369a9a5e85c6770ad6",
+            "reference:01_API.md",
+            "reference:03_energy.md",
+            "narrative:historical_logbook.md#2026-10-18"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 2,
+            "narrative": 1
+          }
+        },
+        "contextual": {
+          "hit_at_k": true,
+          "recall_at_k": 1.0,
+          "reciprocal_rank": 1.0,
+          "found": [
+            "hist:7c369a9a5e85c6770ad6"
+          ],
+          "source_ids": [
+            "hist:7c369a9a5e85c6770ad6",
+            "hist:d33cb1956931b5a81098",
+            "reference:01_API.md",
+            "reference:01_API.md",
+            "reference:03_energy.md"
+          ],
+          "categories": {
+            "historical_episode": 2,
+            "reference": 3
+          }
+        }
+      }
+    }
+  ],
+  "external_model_calls": 0
+}

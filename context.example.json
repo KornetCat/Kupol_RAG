@@ -1,0 +1,6 @@
+{
+  "trusted": false,
+  "emergency_stop": null,
+  "operator_activity": "UNKNOWN",
+  "required_fume": false
+}

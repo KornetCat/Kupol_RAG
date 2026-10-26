@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "case_id": "2026-10-26-team4-emergency-light-manual",
+  "kind": "manual_functional_test",
+  "outcome": "HUMAN_CONFIRMED_SUCCESS",
+  "environment": "manual_live:team4",
+  "team": 4,
+  "role": "team",
+  "node_id": "smart_panel_01",
+  "line": 7,
+  "line_name": "Аварийное освещение",
+  "observations": [
+    {
+      "source": "output/emergency_light/20261026-193145-084500/result.json",
+      "started_at": "2026-10-26T19:31:45+03:00",
+      "finished_at": "2026-10-26T19:31:49+03:00",
+      "request": {
+        "type": "control",
+        "node_id": "smart_panel_01",
+        "action": "line_on",
+        "value": 7
+      },
+      "response": {
+        "success": true,
+        "node_id": "smart_panel_01",
+        "action": "line_on",
+        "mode": "real",
+        "type": "control_response",
+        "request_id": "2"
+      },
+      "before": {
+        "server_timestamp": 1793032274.7407467,
+        "panel_updated_at": 1793032274.741,
+        "bus_powered": true,
+        "line": {
+          "line": 7,
+          "name": "Аварийное освещение",
+          "rated_current_a": 6.0,
+          "state": "OFF",
+          "voltage_v": 239.2,
+          "current_a": 0.0,
+          "power_w": 0.0,
+          "leakage_ma": 0.0,
+          "protection_state": "ARMED",
+          "alarm": false,
+          "alarm_code": null,
+          "lockout_remaining_s": 0.0,
+          "lockout_reason": null
+        }
+      },
+      "after": {
+        "server_timestamp": 1793032278.7407467,
+        "panel_updated_at": 1793032278.741,
+        "bus_powered": true,
+        "line": {
+          "line": 7,
+          "name": "Аварийное освещение",
+          "rated_current_a": 6.0,
+          "state": "ON",
+          "voltage_v": 239.2,
+          "current_a": 0.0,
+          "power_w": 0.0,
+          "leakage_ma": 0.0,
+          "protection_state": "ARMED",
+          "alarm": false,
+          "alarm_code": null,
+          "lockout_remaining_s": 0.0,
+          "lockout_reason": null
+        }
+      },
+      "recorded_post_action_frames": 1,
+      "api_state_transition_confirmed": true,
+      "human_confirmed_success": true
+    },
+    {
+      "source": "output/emergency_light/20261026-193214-443959/result.json",
+      "started_at": "2026-10-26T19:32:14+03:00",
+      "finished_at": "2026-10-26T19:32:20+03:00",
+      "request": {
+        "type": "control",
+        "node_id": "smart_panel_01",
+        "action": "line_off",
+        "value": 7
+      },
+      "response": {
+        "success": true,
+        "node_id": "smart_panel_01",
+        "action": "line_off",
+        "mode": "real",
+        "type": "control_response",
+        "request_id": "2"
+      },
+      "before": {
+        "server_timestamp": 1793032302.7407467,
+        "panel_updated_at": 1793032302.741,
+        "bus_powered": true,
+        "line": {
+          "line": 7,
+          "name": "Аварийное освещение",
+          "rated_current_a": 6.0,
+          "state": "ON",
+          "voltage_v": 239.2,
+          "current_a": 0.0,
+          "power_w": 0.0,
+          "leakage_ma": 0.0,
+          "protection_state": "ARMED",
+          "alarm": false,
+          "alarm_code": null,
+          "lockout_remaining_s": 0.0,
+          "lockout_reason": null
+        }
+      },
+      "after": {
+        "server_timestamp": 1793032310.7407467,
+        "panel_updated_at": 1793032310.741,
+        "bus_powered": true,
+        "line": {
+          "line": 7,
+          "name": "Аварийное освещение",
+          "rated_current_a": 6.0,
+          "state": "OFF",
+          "voltage_v": 239.2,
+          "current_a": 0.0,
+          "power_w": 0.0,
+          "leakage_ma": 0.0,
+          "protection_state": "ARMED",
+          "alarm": false,
+          "alarm_code": null,
+          "lockout_remaining_s": 0.0,
+          "lockout_reason": null
+        }
+      },
+      "recorded_post_action_frames": 1,
+      "api_state_transition_confirmed": true,
+      "human_confirmed_success": true
+    }
+  ],
+  "user_confirmation": {
+    "source": "current_conversation",
+    "date": "2026-10-26",
+    "quote": "Включение и выключение аварийного освещения прошло успешно. Запомни этот опыт и учти его в будущем при улучшении агентов"
+  },
+  "retrieval_eligible": true,
+  "instruction_authority": false,
+  "automatic_statistics_eligible": false,
+  "automatic_statistics_reason": "Only one recorded post-action frame per action; human confirmation is stored separately, not converted into invented telemetry observations.",
+  "lessons": [
+    {
+      "issue": "millisecond_rounding",
+      "observed_frame_timestamp": 1793032234.7407467,
+      "observed_panel_updated_at": 1793032234.741,
+      "rounding_tolerance_s": 0.001,
+      "implemented_in": "emergency_light.py",
+      "follow_up": "Review analogous strict timestamp comparison in engine.py during next agent improvement."
+    },
+    {
+      "issue": "measurement_semantics",
+      "voltage_v_observed_in_both_states": 239.2,
+      "current_a_observed_in_both_states": 0.0,
+      "power_w_observed_in_both_states": 0.0,
+      "lesson": "Do not infer physical lamp output from these values alone; preserve API, telemetry and human confirmation as separate evidence."
+    },
+    {
+      "issue": "silent_rejection",
+      "lesson": "Print connection/auth/control/verification stages and precise rejection reasons."
+    }
+  ],
+  "last_observed_state": "OFF",
+  "last_observed_at": "2026-10-26T19:32:20+03:00",
+  "recorded_at": "2026-10-26T19:35:32+03:00",
+  "connection_address_policy": "Provided at connection time; IP may change and is not part of persistent scenario memory."
+}
