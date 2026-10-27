@@ -1,0 +1,22 @@
+{
+  "version": "0.4.0",
+  "passed": true,
+  "source_parity_files": 203,
+  "source_files_dropped": 0,
+  "actual_team_key_scan_performed": true,
+  "credentials_found": false,
+  "archives": [
+    {
+      "file": "kupol_rag_agent_0.4.0.zip",
+      "entries": 203,
+      "bytes": 757507,
+      "sha256": "ed1a006d806518fffb3f467b27c30977de1cfd03a4e4c813966e56e234955e72"
+    },
+    {
+      "file": "kupol_windows_x64_0.4.0.zip",
+      "entries": 504,
+      "bytes": 14323820,
+      "sha256": "1b0b601aec265d8ce6b835071c6529bd8f16e45a8a34c3fde390f45bc2fab081"
+    }
+  ]
+}

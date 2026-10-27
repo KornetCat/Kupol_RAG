@@ -1,0 +1,2 @@
+ed1a006d806518fffb3f467b27c30977de1cfd03a4e4c813966e56e234955e72  kupol_rag_agent_0.4.0.zip
+1b0b601aec265d8ce6b835071c6529bd8f16e45a8a34c3fde390f45bc2fab081  kupol_windows_x64_0.4.0.zip

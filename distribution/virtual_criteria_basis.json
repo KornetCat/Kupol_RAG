@@ -1,0 +1,69 @@
+{
+  "scope": "preliminary_virtual_only_not_physical_standard",
+  "source_revision": "a16da2db079cdcb395e354383199effdf5a170b2",
+  "dates": [
+    "2026-10-12",
+    "2026-10-18"
+  ],
+  "sources": [
+    {
+      "file": "tmp/upstream_a16da2d/Logs/2026-10-12/telemetry.jsonl",
+      "bytes": 24975616,
+      "sha256": "34f7f54878562ab904fea4da2dfadd18a91417884bb1d35b15de3ffa8ebb129b",
+      "frames": 1440,
+      "excluded_episode_intervals": 30
+    },
+    {
+      "file": "tmp/upstream_a16da2d/Logs/2026-10-18/telemetry.jsonl",
+      "bytes": 31955568,
+      "sha256": "5b9d9ade36bdf1f133cc177c0fdc89dd12102392660df03a29de9787b19bcb5b",
+      "frames": 1440,
+      "excluded_episode_intervals": 11
+    }
+  ],
+  "frames_examined": 2880,
+  "excluded_frames": {
+    "known_episode_window": 1679
+  },
+  "filters": {
+    "time_basis": "source ts interpreted +03:00; per-node age <=15s",
+    "quality": "online true,status OK,no alarm or alarm_code",
+    "global": "both smoke false and fresh; all reported PLC protections ARMED; exclude ALL known manifest episode windows +/-120s",
+    "setpoints": "supply FRESH_AIR at100% only; cooling separated by speed_pct; fume fixed on/no speed control"
+  },
+  "quantiles": {
+    "cooling_ON_speed70.0_flow_l_min": {
+      "n": 1201,
+      "min": 3.95,
+      "p05": 4.06,
+      "p25": 4.14,
+      "median": 4.2,
+      "p75": 4.25,
+      "p95": 4.33,
+      "max": 4.49
+    },
+    "fume_enabled_motor_OK_rpm_positive_line1_ON_airflow_pct": {
+      "n": 1200,
+      "min": 96.8,
+      "p05": 96.8,
+      "p25": 96.8,
+      "median": 96.8,
+      "p75": 96.8,
+      "p95": 96.8,
+      "max": 96.8
+    }
+  },
+  "proposed_virtual_criteria": {
+    "min_airflow_pct": 60,
+    "min_supply_flow_m3_h": 200,
+    "min_cooling_flow_l_min": 2
+  },
+  "limitations": [
+    "Historical selection is observational, not a calibrated safety norm",
+    "Only two representative days, not all seven days",
+    "Non-alarmed latent degradation or unknown faults may remain",
+    "No guarantee for other setpoints/equipment or a physical Dome",
+    "Values are functional test predicates only; full repair and human safety require separate validation"
+  ],
+  "duration_s": 2.982
+}
